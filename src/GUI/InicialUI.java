@@ -275,7 +275,6 @@ public class InicialUI extends javax.swing.JFrame {
     }
     
     private void loginAction(java.awt.event.ActionEvent evt) {
-        String errorMessage = "usuario o contraseña incorrectos";
         loginErrorMessage.setText("");
         String email = loginEmailText.getText();
         String pass = new String(loginPasswordText.getPassword());
@@ -308,7 +307,7 @@ public class InicialUI extends javax.swing.JFrame {
             cliente.setVisible(true);
             dispose();
         } else {
-            loginErrorMessage.setText(errorMessage);
+            loginErrorMessage.setText("usuario o contraseña incorrectos");
         }
     }
     

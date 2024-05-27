@@ -23,7 +23,6 @@ public class ClienteUI extends javax.swing.JFrame {
     private static final int MAX_PER_PAGE = 5;
 
     private Cliente clienteLogged;
-    private List<Reservacion> reservaciones;
     private int reservacionespaginaActual = 0;
     private int reservacionesPaginasTotales;
 
@@ -36,9 +35,9 @@ public class ClienteUI extends javax.swing.JFrame {
 
     public ClienteUI(Cliente clienteLogged) {
         this.clienteLogged = clienteLogged;
-        this.reservaciones = Main.reservaciones(clienteLogged.getDocumento());
-        reservacionesPaginasTotales = reservaciones.size() / MAX_PER_PAGE;
-        if (reservaciones.size() % MAX_PER_PAGE != 0) {
+        this.clienteLogged.setReservas(Main.reservaciones(clienteLogged.getDocumento()));
+        reservacionesPaginasTotales = this.clienteLogged.getReservas().size() / MAX_PER_PAGE;
+        if (this.clienteLogged.getReservas().size() % MAX_PER_PAGE != 0) {
             reservacionesPaginasTotales++;
         }
         initComponents();
@@ -237,17 +236,15 @@ public class ClienteUI extends javax.swing.JFrame {
         mainReservacionesPanel.revalidate();
         mainReservacionesPanel.repaint();
         List<Reservacion> filtrados;
-        if (reservaciones.size() <= MAX_PER_PAGE) {
-            filtrados = reservaciones;
-
+        if (this.clienteLogged.getReservas().size() <= MAX_PER_PAGE) {
+            filtrados = this.clienteLogged.getReservas();
         } else {
             int inicio = reservacionespaginaActual * MAX_PER_PAGE;
             int fin = inicio + MAX_PER_PAGE;
-            if (fin > reservaciones.size()) {
-                fin = reservaciones.size();
+            if (fin > this.clienteLogged.getReservas().size()) {
+                fin = this.clienteLogged.getReservas().size();
             }
-            filtrados = reservaciones.subList(inicio, fin);
-
+            filtrados = this.clienteLogged.getReservas().subList(inicio, fin);
         }
         for (Reservacion reservacion : filtrados) {
             mainReservacionesPanel.add(buildReservacionCard(reservacion));
