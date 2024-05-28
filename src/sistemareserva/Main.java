@@ -31,7 +31,14 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        hotel = new Hotel("Paradise", "Calle falsa 123");
+        hotel = new Hotel(
+            "Paradise Hotel",
+            "Carrera 45 #123-45, Bogotá, Colombia",
+            "+57 1 2345678",
+            "+57 311 9876543",
+            "+57 1 2345679",
+            "900123456-7",
+            "info@paradisehotel.co");
         cargarDatosIniciales();
         
         InicialUI paginaInicial = new InicialUI();

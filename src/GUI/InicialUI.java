@@ -27,6 +27,8 @@ public class InicialUI extends javax.swing.JFrame {
         menuAboutBtn.addActionListener(this::changePanel);
         
         loginActionBtn.addActionListener(this::loginAction);
+        homecreation();
+        
     }
 
     /**
@@ -48,7 +50,12 @@ public class InicialUI extends javax.swing.JFrame {
         menuAboutBtn = new javax.swing.JButton();
         content = new javax.swing.JTabbedPane();
         homePanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        borderhedadhome = new javax.swing.JPanel();
+        scrollHomepage = new javax.swing.JScrollPane();
+        ContentHomeScroll = new javax.swing.JPanel();
+        fraseHome = new javax.swing.JLabel();
+        backgroundhome = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         loginPanel = new javax.swing.JPanel();
         loginFormPanel = new javax.swing.JPanel();
         loginEmailLabel = new javax.swing.JLabel();
@@ -62,7 +69,6 @@ public class InicialUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1080, 720));
         setResizable(false);
         setSize(new java.awt.Dimension(1080, 720));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -94,11 +100,14 @@ public class InicialUI extends javax.swing.JFrame {
         );
         toolbarLayout.setVerticalGroup(
             toolbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(logoImg, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(toolbarLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(menuButton)
-                .addContainerGap())
+                .addGroup(toolbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(logoImg, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(toolbarLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(menuButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         getContentPane().add(toolbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, -1));
@@ -114,6 +123,11 @@ public class InicialUI extends javax.swing.JFrame {
         menuHomeBtn.setText("Home");
         menuHomeBtn.setBorderPainted(false);
         menuHomeBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        menuHomeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuHomeBtnActionPerformed(evt);
+            }
+        });
 
         menuLoginBtn.setBackground(new java.awt.Color(51, 51, 51));
         menuLoginBtn.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
@@ -161,8 +175,44 @@ public class InicialUI extends javax.swing.JFrame {
         homePanel.setPreferredSize(new java.awt.Dimension(1080, 645));
         homePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("home");
-        homePanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 230, -1, -1));
+        borderhedadhome.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout borderhedadhomeLayout = new javax.swing.GroupLayout(borderhedadhome);
+        borderhedadhome.setLayout(borderhedadhomeLayout);
+        borderhedadhomeLayout.setHorizontalGroup(
+            borderhedadhomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1070, Short.MAX_VALUE)
+        );
+        borderhedadhomeLayout.setVerticalGroup(
+            borderhedadhomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+        );
+
+        homePanel.add(borderhedadhome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1070, 20));
+
+        scrollHomepage.setBorder(null);
+        scrollHomepage.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollHomepage.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollHomepage.setHorizontalScrollBar(null);
+
+        ContentHomeScroll.setBackground(new java.awt.Color(0, 0, 0));
+        ContentHomeScroll.setPreferredSize(new java.awt.Dimension(1070, 2520));
+        ContentHomeScroll.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        fraseHome.setFont(new java.awt.Font("Constantia", 1, 48)); // NOI18N
+        fraseHome.setForeground(new java.awt.Color(255, 255, 255));
+        fraseHome.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        ContentHomeScroll.add(fraseHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 400, 180));
+
+        backgroundhome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/homebackground.jpg"))); // NOI18N
+        ContentHomeScroll.add(backgroundhome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 630));
+
+        jLabel2.setText("jLabel2");
+        ContentHomeScroll.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 730, 260, 410));
+
+        scrollHomepage.setViewportView(ContentHomeScroll);
+
+        homePanel.add(scrollHomepage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1080, 630));
 
         content.addTab("tab1", homePanel);
 
@@ -178,6 +228,7 @@ public class InicialUI extends javax.swing.JFrame {
         loginEmailText.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         loginEmailText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         loginEmailText.setText("maria@email.com");
+        loginEmailText.setBorder(null);
 
         loginPasswordLabel.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         loginPasswordLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -186,9 +237,12 @@ public class InicialUI extends javax.swing.JFrame {
         loginPasswordText.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         loginPasswordText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         loginPasswordText.setText("123456");
+        loginPasswordText.setBorder(null);
 
         loginActionBtn.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         loginActionBtn.setText("Iniciar Sesión");
+        loginActionBtn.setBorder(null);
+        loginActionBtn.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
 
         loginErrorMessage.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         loginErrorMessage.setForeground(new java.awt.Color(204, 51, 0));
@@ -224,7 +278,7 @@ public class InicialUI extends javax.swing.JFrame {
                 .addComponent(loginPasswordText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
                 .addComponent(loginActionBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addComponent(loginErrorMessage)
                 .addContainerGap())
         );
@@ -232,7 +286,7 @@ public class InicialUI extends javax.swing.JFrame {
         loginPanel.add(loginFormPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 129, 648, 387));
 
         loginBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/inicio.jpg"))); // NOI18N
-        loginPanel.add(loginBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -60, -1, -1));
+        loginPanel.add(loginBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -60, -1, 710));
 
         content.addTab("tab2", loginPanel);
 
@@ -243,9 +297,7 @@ public class InicialUI extends javax.swing.JFrame {
 
         content.addTab("tab3", aboutPanel);
 
-        content.setSelectedIndex(1);
-
-        getContentPane().add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1080, 680));
+        getContentPane().add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1080, 670));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -262,6 +314,10 @@ public class InicialUI extends javax.swing.JFrame {
     private void menuButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuButtonMouseClicked
         toggleMenu();
     }//GEN-LAST:event_menuButtonMouseClicked
+
+    private void menuHomeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuHomeBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuHomeBtnActionPerformed
 
     private void changePanel(java.awt.event.ActionEvent evt) {
         if(evt.getActionCommand().equals(menuHomeBtn.getActionCommand())) {
@@ -311,6 +367,11 @@ public class InicialUI extends javax.swing.JFrame {
         }
     }
     
+    
+    public void homecreation (){
+    fraseHome.setText("<html><p>Vive la Experiencia,<br>" + Main.hotel.getNombre()+"</p></html>");
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -346,11 +407,15 @@ public class InicialUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel ContentHomeScroll;
     private javax.swing.JPanel aboutPanel;
+    private javax.swing.JLabel backgroundhome;
+    private javax.swing.JPanel borderhedadhome;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTabbedPane content;
+    private javax.swing.JLabel fraseHome;
     private javax.swing.JPanel homePanel;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JButton loginActionBtn;
     private javax.swing.JLabel loginBackground;
@@ -367,6 +432,7 @@ public class InicialUI extends javax.swing.JFrame {
     private javax.swing.JLabel menuButton;
     private javax.swing.JButton menuHomeBtn;
     private javax.swing.JButton menuLoginBtn;
+    private javax.swing.JScrollPane scrollHomepage;
     private javax.swing.JPanel toolbar;
     // End of variables declaration//GEN-END:variables
 }
