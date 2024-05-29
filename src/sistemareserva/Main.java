@@ -74,13 +74,13 @@ public class Main {
     
     public static void cargarDatosIniciales() {
         //habitaciones
-        hotel.getHabitaciones().crear(new Habitacion(101, TipoHabitacion.INDIVIDUAL, EstadoHabitacion.DISPONIBLE, 100.0,"imagenes/Habitaciones/habitacionindividual1.jpg"));
-        hotel.getHabitaciones().crear(new Habitacion(102, TipoHabitacion.DOBLE, EstadoHabitacion.DISPONIBLE, 200.0,""));
-        hotel.getHabitaciones().crear(new Habitacion(103, TipoHabitacion.SUITE, EstadoHabitacion.DISPONIBLE, 400.0,""));
+        hotel.getHabitaciones().crear(new Habitacion(101, TipoHabitacion.INDIVIDUAL, EstadoHabitacion.DISPONIBLE, 100.0,"/imagenes/Habitaciones/habitacionindividual1.jpg"));
+        hotel.getHabitaciones().crear(new Habitacion(102, TipoHabitacion.DOBLE, EstadoHabitacion.DISPONIBLE, 200.0,"/imagenes/Habitaciones/habitacionindividual1.jpg"));
+        hotel.getHabitaciones().crear(new Habitacion(103, TipoHabitacion.SUITE, EstadoHabitacion.DISPONIBLE, 400.0,"/imagenes/Habitaciones/habitacionindividual1.jpg"));
         
-        hotel.getHabitaciones().crear(new Habitacion(201, TipoHabitacion.INDIVIDUAL, EstadoHabitacion.DISPONIBLE, 100.0,""));
-        hotel.getHabitaciones().crear(new Habitacion(202, TipoHabitacion.DOBLE, EstadoHabitacion.DISPONIBLE, 200.0,""));
-        hotel.getHabitaciones().crear(new Habitacion(203, TipoHabitacion.SUITE, EstadoHabitacion.DISPONIBLE, 400.0,""));
+        hotel.getHabitaciones().crear(new Habitacion(201, TipoHabitacion.INDIVIDUAL, EstadoHabitacion.DISPONIBLE, 100.0,"/imagenes/Habitaciones/habitacionindividual1.jpg"));
+        hotel.getHabitaciones().crear(new Habitacion(202, TipoHabitacion.DOBLE, EstadoHabitacion.DISPONIBLE, 200.0,"/imagenes/Habitaciones/habitacionindividual1.jpg"));
+        hotel.getHabitaciones().crear(new Habitacion(203, TipoHabitacion.SUITE, EstadoHabitacion.DISPONIBLE, 400.0,"/imagenes/Habitaciones/habitacionindividual1.jpg"));
         
         //empleados
         hotel.getEmpleados().crear(new Empleado("1234567890", "Juan Garcia", "juan@email.com", "123456", RolUsuario.RECEPCION));
