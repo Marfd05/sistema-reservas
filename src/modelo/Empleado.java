@@ -14,7 +14,7 @@ import java.util.List;
 public class Empleado extends Usuario{
     
     private RolUsuario rol;
-    private Usuario supervisor;
+    private Empleado supervisor;
     private List<Habitacion> habitacionesAsiganadas;
 
     public Empleado(String documento, String nombre, String email, String password, RolUsuario rol) {
@@ -32,11 +32,11 @@ public class Empleado extends Usuario{
         this.rol = rol;
     }
 
-    public Usuario getSupervisor() {
+    public Empleado getSupervisor() {
         return supervisor;
     }
 
-    public void setSupervisor(Usuario supervisor) {
+    public void setSupervisor(Empleado supervisor) {
         this.supervisor = supervisor;
     }
 

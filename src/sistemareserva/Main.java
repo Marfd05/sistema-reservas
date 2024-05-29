@@ -84,6 +84,8 @@ public class Main {
         
         //empleados
         hotel.getEmpleados().crear(new Empleado("1234567890", "Juan Garcia", "juan@email.com", "123456", RolUsuario.RECEPCION));
+        hotel.getEmpleados().crear(new Empleado("1234567891", "Camila Fernandez", "camila@email.com", "123456", RolUsuario.ADMIN));
+        
         
         //clientes
         hotel.getClientes().crear(new Cliente("1111111111", "Maria Ceron", "maria@email.com", "123456"));

@@ -5,7 +5,15 @@
 package GUI;
 
 import KentHipos.Kensoft;
-import javax.swing.ImageIcon;
+import enums.RolUsuario;
+import javax.swing.DefaultListSelectionModel;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableModel;
+import modelo.Empleado;
+import sistemareserva.Main;
 
 /**
  *
@@ -13,11 +21,34 @@ import javax.swing.ImageIcon;
  */
 public class EmpleadoUI extends javax.swing.JFrame {
 
+    private Empleado empleadoLogged;
+    private int updateIndex = -1;
+    private Empleado selectedSupervisor;
+    private RolUsuario selectedRol;
+
     /**
      * Creates new form Inicial
      */
     public EmpleadoUI() {
         initComponents();
+    }
+
+    public EmpleadoUI(Empleado empleadoLogged) {
+        this.empleadoLogged = empleadoLogged;
+        initComponents();
+        String userAndRol = this.empleadoLogged.getNombre() + " (" + this.empleadoLogged.getRol().name() + ")";
+        loggedUserNameLabel.setText("Bienvenidx, " + userAndRol);
+
+        switch (this.empleadoLogged.getRol()) {
+            case RolUsuario.ADMIN -> {
+                content.setSelectedIndex(0);
+                loadEmpleados();
+            }
+            case RolUsuario.RECEPCION ->
+                content.setSelectedIndex(1);
+            case RolUsuario.LIMPIEZA ->
+                content.setSelectedIndex(2);
+        }
     }
 
     /**
@@ -32,9 +63,33 @@ public class EmpleadoUI extends javax.swing.JFrame {
         toolbar = new javax.swing.JPanel();
         logoImg = new javax.swing.JLabel();
         menuButton = new javax.swing.JLabel();
+        loggedUserNameLabel = new javax.swing.JLabel();
         menu = new javax.swing.JPanel();
         content = new javax.swing.JTabbedPane();
-        main = new javax.swing.JPanel();
+        adminTabbedPane = new javax.swing.JTabbedPane();
+        empleadosPanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        empleadosTable = new javax.swing.JTable();
+        empleadosForm = new javax.swing.JPanel();
+        empDocumentoLabel = new javax.swing.JLabel();
+        empDocumentoText = new javax.swing.JTextField();
+        empNombreLabel = new javax.swing.JLabel();
+        empNombreText = new javax.swing.JTextField();
+        empEmailLabel = new javax.swing.JLabel();
+        empEmailText = new javax.swing.JTextField();
+        empPassLabel = new javax.swing.JLabel();
+        empPassText = new javax.swing.JTextField();
+        empRolLabel = new javax.swing.JLabel();
+        empRolList = new javax.swing.JComboBox<>();
+        empSupervisorLabel = new javax.swing.JLabel();
+        empSupervisorList = new javax.swing.JComboBox<>();
+        empSaveBtn = new javax.swing.JButton();
+        empCleanBtn = new javax.swing.JButton();
+        empEditButton = new javax.swing.JButton();
+        empDeleteBtn = new javax.swing.JButton();
+        clientesPanel = new javax.swing.JPanel();
+        recepcionTabbedPane = new javax.swing.JTabbedPane();
+        reservasPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -54,6 +109,10 @@ public class EmpleadoUI extends javax.swing.JFrame {
             }
         });
 
+        loggedUserNameLabel.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        loggedUserNameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        loggedUserNameLabel.setText("Bienvenidx");
+
         javax.swing.GroupLayout toolbarLayout = new javax.swing.GroupLayout(toolbar);
         toolbar.setLayout(toolbarLayout);
         toolbarLayout.setHorizontalGroup(
@@ -61,7 +120,9 @@ public class EmpleadoUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, toolbarLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(menuButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 734, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(loggedUserNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(logoImg)
                 .addGap(56, 56, 56))
         );
@@ -70,7 +131,9 @@ public class EmpleadoUI extends javax.swing.JFrame {
             .addComponent(logoImg, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(toolbarLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(menuButton)
+                .addGroup(toolbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(menuButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(loggedUserNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -98,22 +161,141 @@ public class EmpleadoUI extends javax.swing.JFrame {
         content.setMinimumSize(new java.awt.Dimension(900, 680));
         content.setPreferredSize(new java.awt.Dimension(900, 680));
 
-        main.setMaximumSize(new java.awt.Dimension(1080, 645));
-        main.setMinimumSize(new java.awt.Dimension(1080, 645));
-        main.setPreferredSize(new java.awt.Dimension(1080, 645));
+        adminTabbedPane.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
 
-        javax.swing.GroupLayout mainLayout = new javax.swing.GroupLayout(main);
-        main.setLayout(mainLayout);
-        mainLayout.setHorizontalGroup(
-            mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        empleadosPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        empleadosTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Documento", "Nombre", "Email", "Rol", "Supervisor"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(empleadosTable);
+
+        empleadosPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 1068, 268));
+
+        empleadosForm.setLayout(new java.awt.GridLayout(7, 2, 20, 10));
+
+        empDocumentoLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        empDocumentoLabel.setText("Documento");
+        empleadosForm.add(empDocumentoLabel);
+        empleadosForm.add(empDocumentoText);
+
+        empNombreLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        empNombreLabel.setText("Nombre");
+        empleadosForm.add(empNombreLabel);
+        empleadosForm.add(empNombreText);
+
+        empEmailLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        empEmailLabel.setText("Email");
+        empleadosForm.add(empEmailLabel);
+        empleadosForm.add(empEmailText);
+
+        empPassLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        empPassLabel.setText("Contraseña");
+        empleadosForm.add(empPassLabel);
+        empleadosForm.add(empPassText);
+
+        empRolLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        empRolLabel.setText("Rol");
+        empleadosForm.add(empRolLabel);
+
+        empleadosForm.add(empRolList);
+
+        empSupervisorLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        empSupervisorLabel.setText("Supervisor");
+        empleadosForm.add(empSupervisorLabel);
+
+        empleadosForm.add(empSupervisorList);
+
+        empSaveBtn.setText("Crear");
+        empSaveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                empSaveBtnActionPerformed(evt);
+            }
+        });
+        empleadosForm.add(empSaveBtn);
+
+        empCleanBtn.setText("Limpiar");
+        empCleanBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                empCleanBtnActionPerformed(evt);
+            }
+        });
+        empleadosForm.add(empCleanBtn);
+
+        empleadosPanel.add(empleadosForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(298, 18, 471, 246));
+
+        empEditButton.setText("Editar");
+        empEditButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                empEditButtonActionPerformed(evt);
+            }
+        });
+        empleadosPanel.add(empEditButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 300, -1, -1));
+
+        empDeleteBtn.setText("Eliminar");
+        empDeleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                empDeleteBtnActionPerformed(evt);
+            }
+        });
+        empleadosPanel.add(empDeleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 300, -1, -1));
+
+        adminTabbedPane.addTab("Empleados", empleadosPanel);
+
+        javax.swing.GroupLayout clientesPanelLayout = new javax.swing.GroupLayout(clientesPanel);
+        clientesPanel.setLayout(clientesPanelLayout);
+        clientesPanelLayout.setHorizontalGroup(
+            clientesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1080, Short.MAX_VALUE)
         );
-        mainLayout.setVerticalGroup(
-            mainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        clientesPanelLayout.setVerticalGroup(
+            clientesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 610, Short.MAX_VALUE)
+        );
+
+        adminTabbedPane.addTab("clientes", clientesPanel);
+
+        content.addTab("tab2", adminTabbedPane);
+
+        recepcionTabbedPane.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+
+        javax.swing.GroupLayout reservasPanelLayout = new javax.swing.GroupLayout(reservasPanel);
+        reservasPanel.setLayout(reservasPanelLayout);
+        reservasPanelLayout.setHorizontalGroup(
+            reservasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1028, Short.MAX_VALUE)
+        );
+        reservasPanelLayout.setVerticalGroup(
+            reservasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 645, Short.MAX_VALUE)
         );
 
-        content.addTab("tab1", main);
+        recepcionTabbedPane.addTab("tab1", reservasPanel);
+
+        content.addTab("tab2", recepcionTabbedPane);
 
         getContentPane().add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1080, 680));
 
@@ -123,57 +305,189 @@ public class EmpleadoUI extends javax.swing.JFrame {
     private void menuButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuButtonMouseClicked
 
         Kensoft animate = new Kensoft();
-        if(menu.getLocation().x == 0) {    
+        if (menu.getLocation().x == 0) {
             animate.jPanelXLeft(0, -180, 1, 1, menu);
         } else {
             animate.jPanelXRight(-180, 0, 1, 1, menu);
         }
     }//GEN-LAST:event_menuButtonMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+    private void empSaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empSaveBtnActionPerformed
+        String documento = empDocumentoText.getText();
+        String email = empEmailText.getText();
+        String nombre = empNombreText.getText();
+        String pass = empPassText.getText();
+
+        if (!documento.isEmpty() && !email.isEmpty() && !nombre.isEmpty() && !pass.isEmpty()) {
+            boolean existe = false;
+
+            for (Empleado empleado : Main.empleados()) {
+                if (empleado.getDocumento().equals(documento) || empleado.getEmail().equals(email)) {
+                    existe = true;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EmpleadoUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EmpleadoUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EmpleadoUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EmpleadoUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EmpleadoUI().setVisible(true);
+            Empleado newEmpleado = new Empleado(documento, nombre, email, pass, selectedRol);
+            newEmpleado.setSupervisor(selectedSupervisor);
+
+            if (empSaveBtn.getText().equals("Crear")) {
+                if (!existe) {
+                    Main.hotel.getEmpleados().crear(newEmpleado);
+                    loadEmpleados();
+                } else {
+                    JOptionPane.showMessageDialog(this, "El documento o email ya estan registrados.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                if (selectedSupervisor != null && !selectedSupervisor.getDocumento().equals(documento)) {
+                    Main.hotel.getEmpleados().actualizar(updateIndex, newEmpleado);
+                    loadEmpleados();
+                } else {
+                    JOptionPane.showMessageDialog(this, "El supervisor no puede ser el mismo.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe llenar todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_empSaveBtnActionPerformed
+
+    private void empEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empEditButtonActionPerformed
+        updateIndex = empleadosTable.getSelectedRow();
+        if (updateIndex != -1) {
+            Empleado empleado = Main.empleados().get(updateIndex);
+            empDocumentoText.setEnabled(false);
+            empDocumentoText.setText(empleado.getDocumento());
+            empNombreText.setText(empleado.getNombre());
+            empEmailText.setEnabled(false);
+            empEmailText.setText(empleado.getEmail());
+            empPassText.setText(empleado.getPassword());
+
+            empRolList.setSelectedItem(empleado.getRol().name());
+            if (empleado.getSupervisor() != null) {
+                empSupervisorList.setSelectedItem(empleado.getSupervisor().getNombre());
+            } else {
+                empSupervisorList.setSelectedItem(null);
+            }
+
+            empSaveBtn.setText("Guardar");
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un empleado para editar.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_empEditButtonActionPerformed
+
+    private void empCleanBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empCleanBtnActionPerformed
+        empDocumentoText.setEnabled(true);
+        empDocumentoText.setText("");
+        empNombreText.setText("");
+        empEmailText.setEnabled(true);
+        empEmailText.setText("");
+        empPassText.setText("");
+
+        empSaveBtn.setText("Crear");
+        updateIndex = -1;
+        loadEmpleados();
+    }//GEN-LAST:event_empCleanBtnActionPerformed
+
+    private void empDeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empDeleteBtnActionPerformed
+        int index = empleadosTable.getSelectedRow();
+        if (index != -1) {
+            Empleado empleado = Main.empleados().get(index);
+
+            int result = JOptionPane.showConfirmDialog(this,
+                    "¿Está seguro que desea eliminar el empleado " + empleado.getNombre() + "?",
+                    "Eliminar",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (result == JOptionPane.YES_OPTION) {
+                Main.hotel.getEmpleados().eliminar(empleado);
+                loadEmpleados();
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un empleado para eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_empDeleteBtnActionPerformed
+
+    private void loadEmpleados() {
+        int totalEmpleados = Main.empleados().size();
+        String[] columnNames = {"Documento", "Nombre", "Email", "Rol", "Supervisor"};
+        empleadosTable.setModel(new DefaultTableModel(columnNames, totalEmpleados));
+
+        empSupervisorList.removeAllItems();
+        for (int i = 0; i < totalEmpleados; i++) {
+            Empleado empleado = Main.empleados().get(i);
+            Empleado supervisor = empleado.getSupervisor();
+
+            empSupervisorList.addItem(empleado.getNombre());
+
+            empleadosTable.getModel().setValueAt(empleado.getDocumento(), i, 0);
+            empleadosTable.getModel().setValueAt(empleado.getNombre(), i, 1);
+            empleadosTable.getModel().setValueAt(empleado.getEmail(), i, 2);
+            empleadosTable.getModel().setValueAt(empleado.getRol().name(), i, 3);
+            if (supervisor != null) {
+                empleadosTable.getModel().setValueAt(supervisor.getNombre(), i, 4);
+            } else {
+                empleadosTable.getModel().setValueAt(" --- ", i, 4);
+            }
+        }
+
+        empSupervisorList.addItemListener((e) -> {
+            int index = empSupervisorList.getSelectedIndex();
+            if (index != -1) {
+                selectedSupervisor = Main.empleados().get(index);
+            } else {
+                selectedSupervisor = null;
             }
         });
+        
+        if(empSupervisorList.getItemCount()>0) {
+            selectedSupervisor = Main.empleados().get(0);
+        }
+        
+        if (empRolList.getItemCount() == 0) {
+            for (RolUsuario rol : RolUsuario.values()) {
+                empRolList.addItem(rol.name());
+            }
+
+            empRolList.addItemListener((e) -> {
+                selectedRol = RolUsuario.valueOf(empRolList.getSelectedItem().toString());
+            });
+        }
+        
+        selectedRol = RolUsuario.ADMIN;
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane adminTabbedPane;
+    private javax.swing.JPanel clientesPanel;
     private javax.swing.JTabbedPane content;
+    private javax.swing.JButton empCleanBtn;
+    private javax.swing.JButton empDeleteBtn;
+    private javax.swing.JLabel empDocumentoLabel;
+    private javax.swing.JTextField empDocumentoText;
+    private javax.swing.JButton empEditButton;
+    private javax.swing.JLabel empEmailLabel;
+    private javax.swing.JTextField empEmailText;
+    private javax.swing.JLabel empNombreLabel;
+    private javax.swing.JTextField empNombreText;
+    private javax.swing.JLabel empPassLabel;
+    private javax.swing.JTextField empPassText;
+    private javax.swing.JLabel empRolLabel;
+    private javax.swing.JComboBox<String> empRolList;
+    private javax.swing.JButton empSaveBtn;
+    private javax.swing.JLabel empSupervisorLabel;
+    private javax.swing.JComboBox<String> empSupervisorList;
+    private javax.swing.JPanel empleadosForm;
+    private javax.swing.JPanel empleadosPanel;
+    private javax.swing.JTable empleadosTable;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel loggedUserNameLabel;
     private javax.swing.JLabel logoImg;
-    private javax.swing.JPanel main;
     private javax.swing.JPanel menu;
     private javax.swing.JLabel menuButton;
+    private javax.swing.JTabbedPane recepcionTabbedPane;
+    private javax.swing.JPanel reservasPanel;
     private javax.swing.JPanel toolbar;
     // End of variables declaration//GEN-END:variables
 }
