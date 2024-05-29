@@ -26,8 +26,15 @@ public class Reserva extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField1 = new javax.swing.JTextField();
         contentReserva = new javax.swing.JPanel();
         visualHabitacionReservar = new javax.swing.JPanel();
+        datosClientereserva = new javax.swing.JPanel();
+        datosReserva = new javax.swing.JPanel();
+        datosPagoreserva = new javax.swing.JPanel();
+        realizarReservacion = new javax.swing.JButton();
+
+        jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -45,21 +52,79 @@ public class Reserva extends javax.swing.JFrame {
             .addGap(0, 390, Short.MAX_VALUE)
         );
 
+        javax.swing.GroupLayout datosClientereservaLayout = new javax.swing.GroupLayout(datosClientereserva);
+        datosClientereserva.setLayout(datosClientereservaLayout);
+        datosClientereservaLayout.setHorizontalGroup(
+            datosClientereservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 652, Short.MAX_VALUE)
+        );
+        datosClientereservaLayout.setVerticalGroup(
+            datosClientereservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 220, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout datosPagoreservaLayout = new javax.swing.GroupLayout(datosPagoreserva);
+        datosPagoreserva.setLayout(datosPagoreservaLayout);
+        datosPagoreservaLayout.setHorizontalGroup(
+            datosPagoreservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 640, Short.MAX_VALUE)
+        );
+        datosPagoreservaLayout.setVerticalGroup(
+            datosPagoreservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout datosReservaLayout = new javax.swing.GroupLayout(datosReserva);
+        datosReserva.setLayout(datosReservaLayout);
+        datosReservaLayout.setHorizontalGroup(
+            datosReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(datosReservaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(datosPagoreserva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        datosReservaLayout.setVerticalGroup(
+            datosReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, datosReservaLayout.createSequentialGroup()
+                .addContainerGap(171, Short.MAX_VALUE)
+                .addComponent(datosPagoreserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        realizarReservacion.setText("jButton1");
+
         javax.swing.GroupLayout contentReservaLayout = new javax.swing.GroupLayout(contentReserva);
         contentReserva.setLayout(contentReservaLayout);
         contentReservaLayout.setHorizontalGroup(
             contentReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentReservaLayout.createSequentialGroup()
-                .addContainerGap(753, Short.MAX_VALUE)
-                .addComponent(visualHabitacionReservar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+                .addContainerGap(53, Short.MAX_VALUE)
+                .addGroup(contentReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(datosReserva, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(datosClientereserva, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48)
+                .addGroup(contentReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentReservaLayout.createSequentialGroup()
+                        .addComponent(visualHabitacionReservar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentReservaLayout.createSequentialGroup()
+                        .addComponent(realizarReservacion, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55))))
         );
         contentReservaLayout.setVerticalGroup(
             contentReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentReservaLayout.createSequentialGroup()
-                .addGap(77, 77, 77)
+                .addGap(91, 91, 91)
                 .addComponent(visualHabitacionReservar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(realizarReservacion, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(contentReservaLayout.createSequentialGroup()
+                .addGap(0, 83, Short.MAX_VALUE)
+                .addComponent(datosClientereserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(datosReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52))
         );
 
         getContentPane().add(contentReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 650));
@@ -104,6 +169,11 @@ public class Reserva extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contentReserva;
+    private javax.swing.JPanel datosClientereserva;
+    private javax.swing.JPanel datosPagoreserva;
+    private javax.swing.JPanel datosReserva;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton realizarReservacion;
     private javax.swing.JPanel visualHabitacionReservar;
     // End of variables declaration//GEN-END:variables
 }
