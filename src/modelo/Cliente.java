@@ -4,6 +4,7 @@
  */
 package modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,10 +17,12 @@ public class Cliente extends Usuario{
     
     public Cliente(String documento, String nombre, String email) {
         super(documento, nombre, email);
+        this.reservas = new ArrayList<>();
     }
 
     public Cliente(String documento, String nombre, String email, String password) {
         super(documento, nombre, email, password);
+        this.reservas = new ArrayList<>();
     }
 
     public List<Reservacion> getReservas() {

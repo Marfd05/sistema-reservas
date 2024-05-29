@@ -5,6 +5,7 @@
 package modelo;
 
 import enums.RolUsuario;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,9 +21,8 @@ public class Empleado extends Usuario{
     public Empleado(String documento, String nombre, String email, String password, RolUsuario rol) {
         super(documento, nombre, email, password);
         this.rol = rol;
+        this.habitacionesAsiganadas = new ArrayList<>();
     }
-    
-    
 
     public RolUsuario getRol() {
         return rol;
