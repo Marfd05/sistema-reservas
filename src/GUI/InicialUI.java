@@ -66,12 +66,43 @@ public class InicialUI extends javax.swing.JFrame {
         titlehome3body = new javax.swing.JLabel();
         contentHabitaciones = new javax.swing.JPanel();
         habitacion1 = new javax.swing.JPanel();
-        iconHabitacion = new javax.swing.JLabel();
         preciocontent = new javax.swing.JPanel();
         precioaHabitacion = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        iconHabitacion = new javax.swing.JLabel();
         Reservarbutton = new javax.swing.JButton();
         tipoHabitacion = new javax.swing.JLabel();
-        detallesHabitacion = new javax.swing.JLabel();
+        detallesHabitacion = new javax.swing.JPanel();
+        detalle1 = new javax.swing.JLabel();
+        detalle2 = new javax.swing.JLabel();
+        detalle3 = new javax.swing.JLabel();
+        detalle4 = new javax.swing.JLabel();
+        habitacion2 = new javax.swing.JPanel();
+        preciocontent1 = new javax.swing.JPanel();
+        precioaHabitacion1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        iconHabitacion1 = new javax.swing.JLabel();
+        Reservarbutton1 = new javax.swing.JButton();
+        tipoHabitacion1 = new javax.swing.JLabel();
+        detallesHabitacion1 = new javax.swing.JPanel();
+        detalle5 = new javax.swing.JLabel();
+        detalle6 = new javax.swing.JLabel();
+        detalle7 = new javax.swing.JLabel();
+        detalle8 = new javax.swing.JLabel();
+        habitacion3 = new javax.swing.JPanel();
+        preciocontent2 = new javax.swing.JPanel();
+        precioaHabitacion2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        iconHabitacion2 = new javax.swing.JLabel();
+        Reservarbutton2 = new javax.swing.JButton();
+        tipoHabitacion2 = new javax.swing.JLabel();
+        detallesHabitacion2 = new javax.swing.JPanel();
+        detalle9 = new javax.swing.JLabel();
+        detalle10 = new javax.swing.JLabel();
+        detalle11 = new javax.swing.JLabel();
+        detalle12 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         body3background = new javax.swing.JLabel();
         loginPanel = new javax.swing.JPanel();
         loginFormPanel = new javax.swing.JPanel();
@@ -275,36 +306,176 @@ public class InicialUI extends javax.swing.JFrame {
         habitacion1.setBackground(new java.awt.Color(255, 255, 255));
         habitacion1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        iconHabitacion.setBackground(new java.awt.Color(255, 255, 255));
-        iconHabitacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ic_menu.png"))); // NOI18N
-        habitacion1.add(iconHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 230));
-
         preciocontent.setBackground(new java.awt.Color(0, 0, 0));
+
+        precioaHabitacion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        precioaHabitacion.setForeground(new java.awt.Color(255, 255, 255));
+        precioaHabitacion.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/receipt-dollar_1.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        jLabel1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout preciocontentLayout = new javax.swing.GroupLayout(preciocontent);
         preciocontent.setLayout(preciocontentLayout);
         preciocontentLayout.setHorizontalGroup(
             preciocontentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(preciocontentLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(precioaHabitacion, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, preciocontentLayout.createSequentialGroup()
+                .addContainerGap(7, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(precioaHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
         );
         preciocontentLayout.setVerticalGroup(
             preciocontentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(precioaHabitacion, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(precioaHabitacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
         habitacion1.add(preciocontent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 110, 40));
 
+        iconHabitacion.setBackground(new java.awt.Color(255, 255, 255));
+        habitacion1.add(iconHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 230));
+
         Reservarbutton.setBackground(new java.awt.Color(0, 0, 0));
+        Reservarbutton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Reservarbutton.setForeground(new java.awt.Color(255, 255, 255));
         Reservarbutton.setText("Reservar");
-        habitacion1.add(Reservarbutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, -1, -1));
-        habitacion1.add(tipoHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 230, 20));
-        habitacion1.add(detallesHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 230, 30));
+        habitacion1.add(Reservarbutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, -1, -1));
 
-        contentHabitaciones.add(habitacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 290, 390));
+        tipoHabitacion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        habitacion1.add(tipoHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 130, 20));
+
+        detallesHabitacion.setLayout(new java.awt.GridLayout(1, 4));
+        detallesHabitacion.add(detalle1);
+        detallesHabitacion.add(detalle2);
+        detallesHabitacion.add(detalle3);
+        detallesHabitacion.add(detalle4);
+
+        habitacion1.add(detallesHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 250, 50));
+
+        contentHabitaciones.add(habitacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 290, 390));
+
+        habitacion2.setBackground(new java.awt.Color(255, 255, 255));
+        habitacion2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        preciocontent1.setBackground(new java.awt.Color(0, 0, 0));
+
+        precioaHabitacion1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        precioaHabitacion1.setForeground(new java.awt.Color(255, 255, 255));
+        precioaHabitacion1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/receipt-dollar_1.png"))); // NOI18N
+        jLabel2.setText("jLabel1");
+        jLabel2.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        javax.swing.GroupLayout preciocontent1Layout = new javax.swing.GroupLayout(preciocontent1);
+        preciocontent1.setLayout(preciocontent1Layout);
+        preciocontent1Layout.setHorizontalGroup(
+            preciocontent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, preciocontent1Layout.createSequentialGroup()
+                .addContainerGap(7, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(precioaHabitacion1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
+        );
+        preciocontent1Layout.setVerticalGroup(
+            preciocontent1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(precioaHabitacion1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        habitacion2.add(preciocontent1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 110, 40));
+
+        iconHabitacion1.setBackground(new java.awt.Color(255, 255, 255));
+        habitacion2.add(iconHabitacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 230));
+
+        Reservarbutton1.setBackground(new java.awt.Color(0, 0, 0));
+        Reservarbutton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Reservarbutton1.setForeground(new java.awt.Color(255, 255, 255));
+        Reservarbutton1.setText("Reservar");
+        habitacion2.add(Reservarbutton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, -1, -1));
+
+        tipoHabitacion1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        habitacion2.add(tipoHabitacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 130, 20));
+
+        detallesHabitacion1.setLayout(new java.awt.GridLayout(1, 4));
+        detallesHabitacion1.add(detalle5);
+        detallesHabitacion1.add(detalle6);
+        detallesHabitacion1.add(detalle7);
+        detallesHabitacion1.add(detalle8);
+
+        habitacion2.add(detallesHabitacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 250, 50));
+
+        contentHabitaciones.add(habitacion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, 290, 390));
+
+        habitacion3.setBackground(new java.awt.Color(255, 255, 255));
+        habitacion3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        preciocontent2.setBackground(new java.awt.Color(0, 0, 0));
+
+        precioaHabitacion2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        precioaHabitacion2.setForeground(new java.awt.Color(255, 255, 255));
+        precioaHabitacion2.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/receipt-dollar_1.png"))); // NOI18N
+        jLabel4.setText("jLabel1");
+        jLabel4.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        javax.swing.GroupLayout preciocontent2Layout = new javax.swing.GroupLayout(preciocontent2);
+        preciocontent2.setLayout(preciocontent2Layout);
+        preciocontent2Layout.setHorizontalGroup(
+            preciocontent2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, preciocontent2Layout.createSequentialGroup()
+                .addContainerGap(7, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(precioaHabitacion2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
+        );
+        preciocontent2Layout.setVerticalGroup(
+            preciocontent2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(precioaHabitacion2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        habitacion3.add(preciocontent2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 110, 40));
+
+        iconHabitacion2.setBackground(new java.awt.Color(255, 255, 255));
+        habitacion3.add(iconHabitacion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 230));
+
+        Reservarbutton2.setBackground(new java.awt.Color(0, 0, 0));
+        Reservarbutton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Reservarbutton2.setForeground(new java.awt.Color(255, 255, 255));
+        Reservarbutton2.setText("Reservar");
+        habitacion3.add(Reservarbutton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, -1, -1));
+
+        tipoHabitacion2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        habitacion3.add(tipoHabitacion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 130, 20));
+
+        detallesHabitacion2.setLayout(new java.awt.GridLayout(1, 4));
+        detallesHabitacion2.add(detalle9);
+        detallesHabitacion2.add(detalle10);
+        detallesHabitacion2.add(detalle11);
+        detallesHabitacion2.add(detalle12);
+
+        habitacion3.add(detallesHabitacion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 250, 50));
+
+        contentHabitaciones.add(habitacion3, new org.netbeans.lib.awtextra.AbsoluteConstraints(715, 140, 290, 390));
+
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText(">");
+        contentHabitaciones.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 550, 70, 30));
+
+        jButton3.setBackground(new java.awt.Color(0, 0, 0));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("<");
+        contentHabitaciones.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 550, 70, 30));
 
         body3home.add(contentHabitaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 640));
 
@@ -469,8 +640,9 @@ public class InicialUI extends javax.swing.JFrame {
             loginErrorMessage.setText("usuario o contraseña incorrectos");
         }
     }
-    
- 
+    public void panelHabitacioncreation(){
+        
+    }
     public void homecreation (){
     fraseHome.setText("<html><p>Vive la Experiencia,<br>" + Main.hotel.getNombre()+"</p></html>");
     titulo2bodyhome.setText("<html><p>Bienvenido a "+ Main.hotel.getNombre()+"</p></html>");
@@ -515,6 +687,8 @@ public class InicialUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ContentHomeScroll;
     private javax.swing.JButton Reservarbutton;
+    private javax.swing.JButton Reservarbutton1;
+    private javax.swing.JButton Reservarbutton2;
     private javax.swing.JPanel aboutPanel;
     private javax.swing.JLabel backgroundhome;
     private javax.swing.JPanel body1home;
@@ -526,14 +700,37 @@ public class InicialUI extends javax.swing.JFrame {
     private javax.swing.JTabbedPane content;
     private javax.swing.JPanel contentHabitaciones;
     private javax.swing.JLabel descripcionHotelhome2body;
-    private javax.swing.JLabel detallesHabitacion;
+    private javax.swing.JLabel detalle1;
+    private javax.swing.JLabel detalle10;
+    private javax.swing.JLabel detalle11;
+    private javax.swing.JLabel detalle12;
+    private javax.swing.JLabel detalle2;
+    private javax.swing.JLabel detalle3;
+    private javax.swing.JLabel detalle4;
+    private javax.swing.JLabel detalle5;
+    private javax.swing.JLabel detalle6;
+    private javax.swing.JLabel detalle7;
+    private javax.swing.JLabel detalle8;
+    private javax.swing.JLabel detalle9;
+    private javax.swing.JPanel detallesHabitacion;
+    private javax.swing.JPanel detallesHabitacion1;
+    private javax.swing.JPanel detallesHabitacion2;
     private javax.swing.JLabel fot2bodyhome2;
     private javax.swing.JLabel foto2bodyhome;
     private javax.swing.JLabel fraseHome;
     private javax.swing.JPanel habitacion1;
+    private javax.swing.JPanel habitacion2;
+    private javax.swing.JPanel habitacion3;
     private javax.swing.JPanel homePanel;
     private javax.swing.JLabel iconHabitacion;
+    private javax.swing.JLabel iconHabitacion1;
+    private javax.swing.JLabel iconHabitacion2;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton loginActionBtn;
     private javax.swing.JLabel loginBackground;
@@ -551,9 +748,15 @@ public class InicialUI extends javax.swing.JFrame {
     private javax.swing.JButton menuHomeBtn;
     private javax.swing.JButton menuLoginBtn;
     private javax.swing.JLabel precioaHabitacion;
+    private javax.swing.JLabel precioaHabitacion1;
+    private javax.swing.JLabel precioaHabitacion2;
     private javax.swing.JPanel preciocontent;
+    private javax.swing.JPanel preciocontent1;
+    private javax.swing.JPanel preciocontent2;
     private javax.swing.JScrollPane scrollHomepage;
     private javax.swing.JLabel tipoHabitacion;
+    private javax.swing.JLabel tipoHabitacion1;
+    private javax.swing.JLabel tipoHabitacion2;
     private javax.swing.JLabel titlehome3body;
     private javax.swing.JLabel titulo2bodyhome;
     private javax.swing.JPanel toolbar;
