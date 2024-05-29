@@ -31,11 +31,7 @@ public class Reservacion {
         this.habitacion = habitacion;
         this.cliente = cliente;
         this.pago = new Pago(montoPago, tipoPago, new Date());
-        if(montoPago < this.habitacion.getPrecioPorNoche()) {
-            this.estado = EstadoReservacion.PENDIENTE;
-        } else {
-            this.estado = EstadoReservacion.CONFIRMADA;
-        }
+        this.estado = EstadoReservacion.CONFIRMADA;
     }
 
     public String getId() {
