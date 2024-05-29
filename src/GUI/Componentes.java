@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import javax.swing.JFrame;
 import modelo.Habitacion;
 
 /**
@@ -12,7 +13,7 @@ import modelo.Habitacion;
  */
 public class Componentes {
     
-    public static void buildHabitacioncard(Habitacion habitacion, int x, javax.swing.JPanel contenedor) {
+    public static void buildHabitacioncard(Habitacion habitacion, int x, int y, javax.swing.JPanel contenedor, JFrame frame) {
         javax.swing.JPanel habitacionPanel = new javax.swing.JPanel();
         javax.swing.JPanel preciocontent = new javax.swing.JPanel();
         javax.swing.JLabel precioHabitacion = new javax.swing.JLabel();
@@ -36,7 +37,7 @@ public class Componentes {
         precioHabitacion.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         precioHabitacion.setText("" + habitacion.getPrecioPorNoche());
 
-        precioetiqueta.setIcon(new javax.swing.ImageIcon("/imagenes/receipt-dollar_1.png")); // NOI18N
+        precioetiqueta.setIcon(new javax.swing.ImageIcon(frame.getClass().getResource("/imagenes/receipt-dollar_1.png"))); // NOI18N
         precioetiqueta.setText("");
         precioetiqueta.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
@@ -60,7 +61,7 @@ public class Componentes {
         habitacionPanel.add(preciocontent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 110, 40));
 
         iconHabitacion.setBackground(new java.awt.Color(255, 255, 255));
-        iconHabitacion.setIcon(new javax.swing.ImageIcon(habitacion.getIcono()));
+        iconHabitacion.setIcon(new javax.swing.ImageIcon(frame.getClass().getResource(habitacion.getIcono())));
         habitacionPanel.add(iconHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 230));
 
         Reservarbutton.setBackground(new java.awt.Color(0, 0, 0));
@@ -92,7 +93,7 @@ public class Componentes {
         detallesHabitacion.add(detalle4);
 
         habitacionPanel.add(detallesHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 250, 50));
-        contenedor.add(habitacionPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(x, 140, 290, 390));
+        contenedor.add(habitacionPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(x, y, 290, 390));
 
     }
     

@@ -1,10 +1,9 @@
 package GUI;
 
+import GUI.panel.HabitacionesPanel;
 import KentHipos.Kensoft;
-import java.util.List;
 import modelo.Cliente;
 import modelo.Empleado;
-import modelo.Habitacion;
 import sistemareserva.Main;
 
 /**
@@ -13,28 +12,23 @@ import sistemareserva.Main;
  */
 public class InicialUI extends javax.swing.JFrame {
 
-    private static final int MAX_PER_PAGE_HOME_HABITACION = 3;
-    private int habitacionespaginaActual = 0;
-    private int habitacionesPaginasTotales;
-
     /**
      * Creates new form Inicial
      */
     public InicialUI() {
-        habitacionesPaginasTotales = Main.habitaciones().size() / MAX_PER_PAGE_HOME_HABITACION;
-        if (Main.habitaciones().size() % MAX_PER_PAGE_HOME_HABITACION != 0) {
-            habitacionesPaginasTotales++;
-        }
         initComponents();
+        
+        contentHabitaciones = new HabitacionesPanel(this);
+        contentHabitaciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        body3home.add(contentHabitaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 640));
 
         menuHomeBtn.addActionListener(this::changePanel);
         menuLoginBtn.addActionListener(this::changePanel);
         menuAboutBtn.addActionListener(this::changePanel);
 
         loginActionBtn.addActionListener(this::loginAction);
-
+        
         homecreation();
-
     }
 
     /**
@@ -68,7 +62,6 @@ public class InicialUI extends javax.swing.JFrame {
         titulo2bodyhome = new javax.swing.JLabel();
         descripcionHotelhome2body = new javax.swing.JLabel();
         body3home = new javax.swing.JPanel();
-        contentHabitaciones = new javax.swing.JPanel();
         loginPanel = new javax.swing.JPanel();
         loginFormPanel = new javax.swing.JPanel();
         loginEmailLabel = new javax.swing.JLabel();
@@ -248,10 +241,6 @@ public class InicialUI extends javax.swing.JFrame {
 
         body3home.setBackground(new java.awt.Color(0, 0, 0,160));
         body3home.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        contentHabitaciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        body3home.add(contentHabitaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 640));
-
         ContentHomeScroll.add(body3home, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 1290, 1070, 640));
 
         scrollHomepage.setViewportView(ContentHomeScroll);
@@ -410,167 +399,15 @@ public class InicialUI extends javax.swing.JFrame {
             loginErrorMessage.setText("usuario o contraseña incorrectos");
         }
     }
-
-    private void cargarHabitaciones() {
-     
-
-        contentHabitaciones.removeAll();
-        contentHabitaciones.revalidate();
-        contentHabitaciones.repaint();  
-        
-        List<Habitacion> filtrados;
-        
-
-        if (Main.habitaciones().size() <= MAX_PER_PAGE_HOME_HABITACION) {
-            filtrados = Main.habitaciones();
-        } else {
-            int inicio = habitacionespaginaActual * MAX_PER_PAGE_HOME_HABITACION;
-            int fin = inicio + MAX_PER_PAGE_HOME_HABITACION;
-            if (fin > Main.habitaciones().size()) {
-                fin = Main.habitaciones().size();
-            }
-            filtrados = Main.habitaciones().subList(inicio, fin);
-        }
-        
-        javax.swing.JLabel titlehome3body = new javax.swing.JLabel();
-        titlehome3body.setFont(new java.awt.Font("Constantia", 3, 24)); // NOI18N
-        titlehome3body.setForeground(new java.awt.Color(255, 255, 255));
-        titlehome3body.setText("Habitaciones:");
-        contentHabitaciones.add(titlehome3body, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 260, 70));
-        
-        buildHabitacioncard(filtrados.get(0), 50); // primer card
-        if (filtrados.size() > 1) {
-            buildHabitacioncard(filtrados.get(1), 380); //segunda card
-        }
-        if (filtrados.size() > 2) {
-            buildHabitacioncard(filtrados.get(2), 715); //tercer card
-        }
-        buildButtonhabitacion("<", 270);
-        buildButtonhabitacion(">", 720);
-        
-        javax.swing.JLabel body3background = new javax.swing.JLabel();
-        body3background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/homepage3body.jpg"))); // NOI18N
-        contentHabitaciones.add(body3background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 640));
-        
-
-
-
-    }
-
-    private void buildButtonhabitacion(String contentButton, int x) {
-        javax.swing.JButton buttonHabitacion = new javax.swing.JButton();
-        buttonHabitacion.setBackground(new java.awt.Color(0, 0, 0));
-        buttonHabitacion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        buttonHabitacion.setForeground(new java.awt.Color(255, 255, 255));
-        buttonHabitacion.setText(contentButton);
-        buttonHabitacion.addActionListener(this::changeHabitacionesPage);
-        contentHabitaciones.add(buttonHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(x, 550, 70, 30 ));
-    }
-
-    private void  buildHabitacioncard(Habitacion habitacion, int x) {
-        javax.swing.JPanel habitacionPanel = new javax.swing.JPanel();
-        javax.swing.JPanel preciocontent = new javax.swing.JPanel();
-        javax.swing.JLabel precioHabitacion = new javax.swing.JLabel();
-        javax.swing.JLabel precioetiqueta = new javax.swing.JLabel();
-        javax.swing.JLabel iconHabitacion = new javax.swing.JLabel();
-        javax.swing.JButton Reservarbutton = new javax.swing.JButton();
-        javax.swing.JLabel tipoHabitacion = new javax.swing.JLabel();
-        javax.swing.JPanel detallesHabitacion = new javax.swing.JPanel();
-        javax.swing.JLabel detalle1 = new javax.swing.JLabel();
-        javax.swing.JLabel detalle2 = new javax.swing.JLabel();
-        javax.swing.JLabel detalle3 = new javax.swing.JLabel();
-        javax.swing.JLabel detalle4 = new javax.swing.JLabel();
-
-        habitacionPanel.setBackground(new java.awt.Color(255, 255, 255));
-        habitacionPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        preciocontent.setBackground(new java.awt.Color(0, 0, 0));
-
-        precioHabitacion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        precioHabitacion.setForeground(new java.awt.Color(255, 255, 255));
-        precioHabitacion.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        precioHabitacion.setText("" + habitacion.getPrecioPorNoche());
-
-        precioetiqueta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/receipt-dollar_1.png"))); // NOI18N
-        precioetiqueta.setText("");
-        precioetiqueta.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-
-        javax.swing.GroupLayout preciocontentLayout = new javax.swing.GroupLayout(preciocontent);
-        preciocontent.setLayout(preciocontentLayout);
-        preciocontentLayout.setHorizontalGroup(
-                preciocontentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, preciocontentLayout.createSequentialGroup()
-                                .addContainerGap(7, Short.MAX_VALUE)
-                                .addComponent(precioetiqueta, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(precioHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12))
-        );
-        preciocontentLayout.setVerticalGroup(
-                preciocontentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(precioHabitacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(precioetiqueta, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-        );
-
-        habitacionPanel.add(preciocontent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 110, 40));
-
-        iconHabitacion.setBackground(new java.awt.Color(255, 255, 255));
-        iconHabitacion.setIcon(new javax.swing.ImageIcon(getClass().getResource(habitacion.getIcono())));
-        habitacionPanel.add(iconHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 230));
-
-        Reservarbutton.setBackground(new java.awt.Color(0, 0, 0));
-        Reservarbutton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        Reservarbutton.setForeground(new java.awt.Color(255, 255, 255));
-        Reservarbutton.setText("Reservar");
-        habitacionPanel.add(Reservarbutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, -1, -1));
-
-        tipoHabitacion.setFont(new java.awt.Font("Segoe UI", 1, 18));// NOI18N
-        tipoHabitacion.setText(habitacion.getTipo().name() + " (" + habitacion.getNumero() + ")");
-        habitacionPanel.add(tipoHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 200, 20));
-
-        detallesHabitacion.setLayout(new java.awt.GridLayout(1, 4));
-
-        detalle1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        detalle1.setText(habitacion.getDetalles().isTv() ? "TV" : "");
-        detallesHabitacion.add(detalle1);
-
-        detalle2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        detalle2.setText(habitacion.getDetalles().isCamaDoble() ? "<html><p>Cama<br>doble</p></html>" : "");
-        detallesHabitacion.add(detalle2);
-
-        detalle3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        detalle3.setText(habitacion.getDetalles().isMinibar() ? "<html><p>Mini<br>bar</p></html>" : "");
-        detallesHabitacion.add(detalle3);
-
-        detalle4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        detalle4.setText(habitacion.getDetalles().isJacuzzi() ? "Jacuzzi" : "");
-        detallesHabitacion.add(detalle4);
-
-        habitacionPanel.add(detallesHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 250, 50));
-        contentHabitaciones.add(habitacionPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(x, 140, 290, 390));
-
-    }
     
-    private void changeHabitacionesPage(java.awt.event.ActionEvent evt) {
-        if (evt.getActionCommand().equals(">")) {
-            if (habitacionespaginaActual < habitacionesPaginasTotales - 1) {
-                habitacionespaginaActual++;
-                cargarHabitaciones();
-            }
-        } else {
-            if (habitacionespaginaActual > 0) {
-                habitacionespaginaActual--;
-                cargarHabitaciones();
-            }
-        }
-
-    }
-    public void homecreation() {
+    private void homecreation() {
 
         fraseHome.setText("<html><p>Vive la Experiencia,<br>" + Main.hotel.getNombre() + "</p></html>");
         titulo2bodyhome.setText("<html><p>Bienvenido a " + Main.hotel.getNombre() + "</p></html>");
         descripcionHotelhome2body.setText("<html>" + Main.hotel.getDescripcion());
-        cargarHabitaciones();
+        
+        contentHabitaciones.cargarHabitaciones();
+        //cargarHabitaciones();
 
     }
 
@@ -608,6 +445,8 @@ public class InicialUI extends javax.swing.JFrame {
         });
     }
 
+    private HabitacionesPanel contentHabitaciones;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ContentHomeScroll;
     private javax.swing.JPanel aboutPanel;
@@ -618,7 +457,6 @@ public class InicialUI extends javax.swing.JFrame {
     private javax.swing.JPanel borderhedadhome;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTabbedPane content;
-    private javax.swing.JPanel contentHabitaciones;
     private javax.swing.JLabel descripcionHotelhome2body;
     private javax.swing.JLabel fot2bodyhome2;
     private javax.swing.JLabel foto2bodyhome;

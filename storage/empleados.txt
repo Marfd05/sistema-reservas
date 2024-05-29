@@ -1,2 +1,2 @@
-{"rol":"RECEPCION","documento":"1234567890","nombre":"Juan Garcia","email":"juan@email.com","password":"123456"}
-{"rol":"ADMIN","documento":"1234567891","nombre":"Camila Fernandez","email":"camila@email.com","password":"123456"}
+{"rol":"RECEPCION","habitacionesAsiganadas":[],"documento":"1234567890","nombre":"Juan Garcia","email":"juan@email.com","password":"123456"}
+{"rol":"ADMIN","habitacionesAsiganadas":[],"documento":"1234567891","nombre":"Camila Fernandez","email":"camila@email.com","password":"123456"}
