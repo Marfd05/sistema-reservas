@@ -133,8 +133,7 @@ public class InicialUI extends javax.swing.JFrame {
                     .addComponent(logoImg, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(toolbarLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addComponent(menuButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(menuButton)))
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
@@ -330,7 +329,7 @@ public class InicialUI extends javax.swing.JFrame {
 
         loginEmailText.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         loginEmailText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        loginEmailText.setText("maria@email.com");
+        loginEmailText.setText("camila@email.com");
         loginEmailText.setBorder(null);
 
         loginPasswordLabel.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
@@ -400,6 +399,8 @@ public class InicialUI extends javax.swing.JFrame {
 
         content.addTab("tab3", aboutPanel);
 
+        content.setSelectedIndex(1);
+
         getContentPane().add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1080, 670));
 
         pack();
@@ -458,7 +459,7 @@ public class InicialUI extends javax.swing.JFrame {
         }
         
         if(empleadoLogged != null) {
-            EmpleadoUI empleadoUI = new EmpleadoUI();
+            EmpleadoUI empleadoUI = new EmpleadoUI(empleadoLogged);
             empleadoUI.setVisible(true);
             dispose();
         } else if(clienteLogged != null) {

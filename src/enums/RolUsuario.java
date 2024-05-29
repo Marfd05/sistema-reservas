@@ -9,5 +9,5 @@ package enums;
  * @author Usuario
  */
 public enum RolUsuario {
-    LIMPIEZA, RECEPCION
+    ADMIN, RECEPCION, LIMPIEZA
 }
