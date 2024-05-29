@@ -17,12 +17,13 @@ public class Hotel {
     private String fax;
     private String nit;
     private String email;
+    private String Descripcion;
     private Data<Habitacion> habitaciones;
     private Data<Empleado> empleados;
     private Data<Cliente> clientes;
     private Data<Reservacion> reservaciones;
 
-    public Hotel(String nombre, String direccion, String telefono, String movil, String fax, String nit, String email) {
+    public Hotel(String nombre, String direccion, String telefono, String movil, String fax, String nit, String email,String Descripcion) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
@@ -30,7 +31,8 @@ public class Hotel {
         this.fax = fax;
         this.nit = nit;
         this.email = email;
-      this.habitaciones = new Data(Habitacion.class, "habitaciones");
+        this.Descripcion = Descripcion;
+        this.habitaciones = new Data(Habitacion.class, "habitaciones");
         this.empleados = new Data(Empleado.class, "empleados");
         this.clientes = new Data(Cliente.class, "clientes");
         this.reservaciones = new Data(Reservacion.class, "reservaciones");
@@ -92,6 +94,13 @@ public class Hotel {
         this.email = email;
     }
 
+    public String getDescripcion() {
+        return Descripcion;
+    }
+
+    public void setDescripcion(String Descripcion) {
+        this.Descripcion = Descripcion;
+    }
 
 
     public Data<Habitacion> getHabitaciones() {

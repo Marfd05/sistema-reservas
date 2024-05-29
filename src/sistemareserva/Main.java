@@ -38,7 +38,11 @@ public class Main {
             "+57 311 9876543",
             "+57 1 2345679",
             "900123456-7",
-            "info@paradisehotel.co");
+            "info@paradisehotel.co",
+            "Ubicado en el corazón vibrante de Bogotá, Colombia, Paradise Hotel ofrece un oasis de lujo y confort para los viajeros más exigentes. "
+                    + "Con habitaciones elegantemente decoradas, un restaurante gourmet, un spa de clase mundial y vistas impresionantes de la ciudad, "
+                    + "nuestro hotel está diseñado para proporcionar una experiencia inolvidable. Ya sea que viajes por negocios o placer, "
+                    + "en Paradise Hotel encontrarás el refugio perfecto donde cada detalle está pensado para tu máxima comodidad y satisfacción.");
         cargarDatosIniciales();
         
         InicialUI paginaInicial = new InicialUI();
@@ -70,13 +74,13 @@ public class Main {
     
     public static void cargarDatosIniciales() {
         //habitaciones
-        hotel.getHabitaciones().crear(new Habitacion(101, TipoHabitacion.INDIVIDUAL, EstadoHabitacion.DISPONIBLE, 100.0));
-        hotel.getHabitaciones().crear(new Habitacion(102, TipoHabitacion.DOBLE, EstadoHabitacion.DISPONIBLE, 200.0));
-        hotel.getHabitaciones().crear(new Habitacion(103, TipoHabitacion.SUITE, EstadoHabitacion.DISPONIBLE, 400.0));
+        hotel.getHabitaciones().crear(new Habitacion(101, TipoHabitacion.INDIVIDUAL, EstadoHabitacion.DISPONIBLE, 100.0,"imagenes/Habitaciones/habitacionindividual1.jpg"));
+        hotel.getHabitaciones().crear(new Habitacion(102, TipoHabitacion.DOBLE, EstadoHabitacion.DISPONIBLE, 200.0,""));
+        hotel.getHabitaciones().crear(new Habitacion(103, TipoHabitacion.SUITE, EstadoHabitacion.DISPONIBLE, 400.0,""));
         
-        hotel.getHabitaciones().crear(new Habitacion(201, TipoHabitacion.INDIVIDUAL, EstadoHabitacion.DISPONIBLE, 100.0));
-        hotel.getHabitaciones().crear(new Habitacion(202, TipoHabitacion.DOBLE, EstadoHabitacion.DISPONIBLE, 200.0));
-        hotel.getHabitaciones().crear(new Habitacion(203, TipoHabitacion.SUITE, EstadoHabitacion.DISPONIBLE, 400.0));
+        hotel.getHabitaciones().crear(new Habitacion(201, TipoHabitacion.INDIVIDUAL, EstadoHabitacion.DISPONIBLE, 100.0,""));
+        hotel.getHabitaciones().crear(new Habitacion(202, TipoHabitacion.DOBLE, EstadoHabitacion.DISPONIBLE, 200.0,""));
+        hotel.getHabitaciones().crear(new Habitacion(203, TipoHabitacion.SUITE, EstadoHabitacion.DISPONIBLE, 400.0,""));
         
         //empleados
         hotel.getEmpleados().crear(new Empleado("1234567890", "Juan Garcia", "juan@email.com", "123456", RolUsuario.RECEPCION));

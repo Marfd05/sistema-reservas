@@ -71,9 +71,6 @@ public class ClienteUI extends javax.swing.JFrame {
         reservacionesNextBtn = new javax.swing.JButton();
         mainReservacionesPanel = new javax.swing.JPanel();
         mainBackground = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -157,6 +154,11 @@ public class ClienteUI extends javax.swing.JFrame {
         mainReservacionesPagPanel.setLayout(new java.awt.GridLayout(1, 3));
 
         reservacionesPrevBtn.setText("<");
+        reservacionesPrevBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reservacionesPrevBtnActionPerformed(evt);
+            }
+        });
         mainReservacionesPagPanel.add(reservacionesPrevBtn);
 
         reservacionesPagLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -177,45 +179,6 @@ public class ClienteUI extends javax.swing.JFrame {
 
         content.addTab("tab1", main);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1080, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 645, Short.MAX_VALUE)
-        );
-
-        content.addTab("tab2", jPanel1);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1080, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 645, Short.MAX_VALUE)
-        );
-
-        content.addTab("tab3", jPanel2);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1080, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 645, Short.MAX_VALUE)
-        );
-
-        content.addTab("tab4", jPanel3);
-
         getContentPane().add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1080, 680));
 
         pack();
@@ -230,6 +193,10 @@ public class ClienteUI extends javax.swing.JFrame {
             animate.jPanelXRight(-180, 0, 1, 1, menu);
         }
     }//GEN-LAST:event_menuButtonMouseClicked
+
+    private void reservacionesPrevBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservacionesPrevBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reservacionesPrevBtnActionPerformed
 
     private void cargarReservaciones() {
         mainReservacionesPanel.removeAll();
@@ -333,9 +300,6 @@ public class ClienteUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane content;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel loggedUserNameLabel;
     private javax.swing.JLabel logoImg;
     private javax.swing.JPanel main;

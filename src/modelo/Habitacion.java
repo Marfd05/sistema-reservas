@@ -6,6 +6,7 @@ package modelo;
 
 import enums.EstadoHabitacion;
 import enums.TipoHabitacion;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -15,14 +16,18 @@ public class Habitacion {
     private int numero;
     private TipoHabitacion tipo;
     private EstadoHabitacion estado;
-    private double precioPorNoche;
+    private double precioPorNoche; 
+    private String icono;
     private DetallesHabitacion detalles;
+   
 
-    public Habitacion(int numero, TipoHabitacion tipo, EstadoHabitacion estado, double precioPorNoche) {
+
+    public Habitacion(int numero, TipoHabitacion tipo, EstadoHabitacion estado, double precioPorNoche,String icono) {
         this.numero = numero;
         this.tipo = tipo;
         this.estado = estado;
         this.precioPorNoche = precioPorNoche;
+        this.icono = icono;
         
         switch (this.tipo) {
             case TipoHabitacion.INDIVIDUAL -> detalles = new Habitacion.DetallesHabitacion(true, false, false, false);
@@ -62,6 +67,13 @@ public class Habitacion {
 
     public void setPrecioPorNoche(double precioPorNoche) {
         this.precioPorNoche = precioPorNoche;
+    }
+
+    public String getIcono() {
+        return icono;
+    }
+    public void setIcono(String icono) {
+        this.icono = icono;
     }
 
     public DetallesHabitacion getDetalles() {
