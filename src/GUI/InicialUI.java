@@ -341,8 +341,6 @@ public class InicialUI extends javax.swing.JFrame {
 
         content.addTab("tab3", aboutPanel);
 
-        content.setSelectedIndex(1);
-
         getContentPane().add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1080, 670));
 
         pack();

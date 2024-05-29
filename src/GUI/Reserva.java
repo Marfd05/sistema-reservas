@@ -4,11 +4,21 @@
  */
 package GUI;
 
+import enums.TipoPago;
+import java.util.Date;
+import modelo.Cliente;
+import modelo.Habitacion;
+
 /**
  *
  * @author Usuario
  */
+import modelo.Reservacion;
+import sistemareserva.Main;
+
 public class Reserva extends javax.swing.JFrame {
+
+    TipoPago selectedTipopago;
 
     /**
      * Creates new form Reserva
@@ -29,9 +39,27 @@ public class Reserva extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         contentReserva = new javax.swing.JPanel();
         visualHabitacionReservar = new javax.swing.JPanel();
-        datosClientereserva = new javax.swing.JPanel();
-        datosReserva = new javax.swing.JPanel();
-        datosPagoreserva = new javax.swing.JPanel();
+        datosClientereservacontent = new javax.swing.JPanel();
+        labelDatosPersonales = new javax.swing.JLabel();
+        NombreDatosPersonales = new javax.swing.JTextField();
+        DocumentoDatosPersonales = new javax.swing.JTextField();
+        EmailDatosPersonales = new javax.swing.JTextField();
+        Nombrelabel = new javax.swing.JLabel();
+        Documentolabel = new javax.swing.JLabel();
+        Emaillabel = new javax.swing.JLabel();
+        reservacontent = new javax.swing.JPanel();
+        DatosReservacontent = new javax.swing.JPanel();
+        labelDatosReserva = new javax.swing.JLabel();
+        Dateinicio = new com.toedter.calendar.JDateChooser();
+        Datefin = new com.toedter.calendar.JDateChooser();
+        findelareservalabel = new javax.swing.JLabel();
+        iniciodelareservalabel = new javax.swing.JLabel();
+        datosPagoreservacontent = new javax.swing.JPanel();
+        labelDatosReserva1 = new javax.swing.JLabel();
+        Totallabel = new javax.swing.JLabel();
+        tipoPagolabel = new javax.swing.JLabel();
+        ComboboxTipopago = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
         realizarReservacion = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
@@ -40,6 +68,7 @@ public class Reserva extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         contentReserva.setBackground(new java.awt.Color(255, 255, 255));
+        contentReserva.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         javax.swing.GroupLayout visualHabitacionReservarLayout = new javax.swing.GroupLayout(visualHabitacionReservar);
         visualHabitacionReservar.setLayout(visualHabitacionReservarLayout);
@@ -52,85 +81,178 @@ public class Reserva extends javax.swing.JFrame {
             .addGap(0, 390, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout datosClientereservaLayout = new javax.swing.GroupLayout(datosClientereserva);
-        datosClientereserva.setLayout(datosClientereservaLayout);
-        datosClientereservaLayout.setHorizontalGroup(
-            datosClientereservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 652, Short.MAX_VALUE)
+        contentReserva.add(visualHabitacionReservar, new org.netbeans.lib.awtextra.AbsoluteConstraints(753, 91, -1, -1));
+
+        labelDatosPersonales.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        labelDatosPersonales.setText("Datos Personales:");
+
+        NombreDatosPersonales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NombreDatosPersonalesActionPerformed(evt);
+            }
+        });
+
+        Nombrelabel.setText("Nombre :");
+
+        Documentolabel.setText("Documento:");
+
+        Emaillabel.setText("Email:");
+
+        javax.swing.GroupLayout datosClientereservacontentLayout = new javax.swing.GroupLayout(datosClientereservacontent);
+        datosClientereservacontent.setLayout(datosClientereservacontentLayout);
+        datosClientereservacontentLayout.setHorizontalGroup(
+            datosClientereservacontentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(datosClientereservacontentLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(datosClientereservacontentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(datosClientereservacontentLayout.createSequentialGroup()
+                        .addComponent(labelDatosPersonales, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, datosClientereservacontentLayout.createSequentialGroup()
+                        .addGroup(datosClientereservacontentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(NombreDatosPersonales, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(datosClientereservacontentLayout.createSequentialGroup()
+                                .addGroup(datosClientereservacontentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(DocumentoDatosPersonales, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Documentolabel)
+                                    .addComponent(Nombrelabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                                .addGroup(datosClientereservacontentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Emaillabel)
+                                    .addComponent(EmailDatosPersonales, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(27, 27, 27))))
         );
-        datosClientereservaLayout.setVerticalGroup(
-            datosClientereservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 220, Short.MAX_VALUE)
+        datosClientereservacontentLayout.setVerticalGroup(
+            datosClientereservacontentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(datosClientereservacontentLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(labelDatosPersonales, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Nombrelabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(NombreDatosPersonales, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(datosClientereservacontentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Documentolabel)
+                    .addComponent(Emaillabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(datosClientereservacontentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(DocumentoDatosPersonales, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EmailDatosPersonales, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33))
         );
 
-        javax.swing.GroupLayout datosPagoreservaLayout = new javax.swing.GroupLayout(datosPagoreserva);
-        datosPagoreserva.setLayout(datosPagoreservaLayout);
-        datosPagoreservaLayout.setHorizontalGroup(
-            datosPagoreservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
-        );
-        datosPagoreservaLayout.setVerticalGroup(
-            datosPagoreservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        contentReserva.add(datosClientereservacontent, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 70, -1, 210));
 
-        javax.swing.GroupLayout datosReservaLayout = new javax.swing.GroupLayout(datosReserva);
-        datosReserva.setLayout(datosReservaLayout);
-        datosReservaLayout.setHorizontalGroup(
-            datosReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(datosReservaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(datosPagoreserva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        datosReservaLayout.setVerticalGroup(
-            datosReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, datosReservaLayout.createSequentialGroup()
-                .addContainerGap(171, Short.MAX_VALUE)
-                .addComponent(datosPagoreserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        reservacontent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        realizarReservacion.setText("jButton1");
+        DatosReservacontent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout contentReservaLayout = new javax.swing.GroupLayout(contentReserva);
-        contentReserva.setLayout(contentReservaLayout);
-        contentReservaLayout.setHorizontalGroup(
-            contentReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentReservaLayout.createSequentialGroup()
-                .addContainerGap(53, Short.MAX_VALUE)
-                .addGroup(contentReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(datosReserva, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(datosClientereserva, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
-                .addGroup(contentReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentReservaLayout.createSequentialGroup()
-                        .addComponent(visualHabitacionReservar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentReservaLayout.createSequentialGroup()
-                        .addComponent(realizarReservacion, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55))))
-        );
-        contentReservaLayout.setVerticalGroup(
-            contentReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentReservaLayout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addComponent(visualHabitacionReservar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(realizarReservacion, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(contentReservaLayout.createSequentialGroup()
-                .addGap(0, 83, Short.MAX_VALUE)
-                .addComponent(datosClientereserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(datosReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52))
-        );
+        labelDatosReserva.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        labelDatosReserva.setText("Detalles De La Reserva :");
+        DatosReservacontent.add(labelDatosReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+        DatosReservacontent.add(Dateinicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 270, 40));
+        DatosReservacontent.add(Datefin, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, 280, 40));
+
+        findelareservalabel.setText("Fin de la reservacion:");
+        DatosReservacontent.add(findelareservalabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, -1, -1));
+
+        iniciodelareservalabel.setText("Inicio de la reservacion:");
+        DatosReservacontent.add(iniciodelareservalabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 130, 20));
+
+        reservacontent.add(DatosReservacontent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 140));
+
+        datosPagoreservacontent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        labelDatosReserva1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        labelDatosReserva1.setText("Detalles Del Pago :");
+        datosPagoreservacontent.add(labelDatosReserva1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+
+        Totallabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Totallabel.setToolTipText("");
+        datosPagoreservacontent.add(Totallabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, 160, 20));
+
+        tipoPagolabel.setText("Tipo pago :");
+        datosPagoreservacontent.add(tipoPagolabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
+
+        datosPagoreservacontent.add(ComboboxTipopago, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 190, -1));
+        datosPagoreservacontent.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 100, 20));
+
+        reservacontent.add(datosPagoreservacontent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 650, 130));
+
+        contentReserva.add(reservacontent, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 320, 652, -1));
+
+        realizarReservacion.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        realizarReservacion.setText("Reservar");
+        realizarReservacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                realizarReservacionActionPerformed(evt);
+            }
+        });
+        contentReserva.add(realizarReservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(779, 509, 246, 47));
 
         getContentPane().add(contentReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 650));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void NombreDatosPersonalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NombreDatosPersonalesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NombreDatosPersonalesActionPerformed
+
+    private void realizarReservacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realizarReservacionActionPerformed
+
+
+    }//GEN-LAST:event_realizarReservacionActionPerformed
+
+    private void ReservaMotion (){
+        
+    }
+    private void reservaAction(Habitacion habitacion) {
+        
+        Cliente cliente = FindorcreateCliente ();
+
+        Date Fechainicio = Dateinicio.getDate();
+        Date Fechafin = Datefin.getDate();
+        
+        long time = Fechafin.getTime() - Fechainicio.getTime();
+        int dias = (int)(time / 1000 / 60 / 60 / 24);
+        
+
+        if (ComboboxTipopago.getItemCount() == 0) {
+            for (TipoPago tipopago : TipoPago.values()) {
+                ComboboxTipopago.addItem(tipopago.name());
+            }
+
+            ComboboxTipopago.addItemListener((e) -> {
+                selectedTipopago = TipoPago.valueOf(ComboboxTipopago.getSelectedItem().toString());
+            });
+        }
+        double total = dias * habitacion.getPrecioPorNoche();
+        Totallabel.setText("Total: $ " + total);
+
+        Reservacion reservacion = new Reservacion(Fechainicio, Fechafin, habitacion, cliente, total, selectedTipopago);
+
+    }
+
+    private Cliente FindorcreateCliente() {
+
+        String Email = EmailDatosPersonales.getText();
+        String Documento = DocumentoDatosPersonales.getText();
+
+        Cliente clienteReservacion = null;
+
+        for (Cliente cliente : Main.clientes()) {
+            if (cliente.getEmail().equals(Email) && cliente.getDocumento().equals(Documento)) {
+                clienteReservacion = cliente;
+            }
+        }
+        if (clienteReservacion == null) {
+            clienteReservacion = new Cliente(Documento, NombreDatosPersonales.getText(), Email);
+            Main.hotel.getClientes().crear(clienteReservacion);
+        }
+        return clienteReservacion;
+    }
 
     /**
      * @param args the command line arguments
@@ -168,12 +290,30 @@ public class Reserva extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> ComboboxTipopago;
+    private com.toedter.calendar.JDateChooser Datefin;
+    private com.toedter.calendar.JDateChooser Dateinicio;
+    private javax.swing.JPanel DatosReservacontent;
+    private javax.swing.JTextField DocumentoDatosPersonales;
+    private javax.swing.JLabel Documentolabel;
+    private javax.swing.JTextField EmailDatosPersonales;
+    private javax.swing.JLabel Emaillabel;
+    private javax.swing.JTextField NombreDatosPersonales;
+    private javax.swing.JLabel Nombrelabel;
+    private javax.swing.JLabel Totallabel;
     private javax.swing.JPanel contentReserva;
-    private javax.swing.JPanel datosClientereserva;
-    private javax.swing.JPanel datosPagoreserva;
-    private javax.swing.JPanel datosReserva;
+    private javax.swing.JPanel datosClientereservacontent;
+    private javax.swing.JPanel datosPagoreservacontent;
+    private javax.swing.JLabel findelareservalabel;
+    private javax.swing.JLabel iniciodelareservalabel;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel labelDatosPersonales;
+    private javax.swing.JLabel labelDatosReserva;
+    private javax.swing.JLabel labelDatosReserva1;
     private javax.swing.JButton realizarReservacion;
+    private javax.swing.JPanel reservacontent;
+    private javax.swing.JLabel tipoPagolabel;
     private javax.swing.JPanel visualHabitacionReservar;
     // End of variables declaration//GEN-END:variables
 }
