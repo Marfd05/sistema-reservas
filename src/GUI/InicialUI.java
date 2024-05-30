@@ -260,7 +260,7 @@ public class InicialUI extends javax.swing.JFrame {
 
         loginEmailText.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         loginEmailText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        loginEmailText.setText("camila@email.com");
+        loginEmailText.setText("maria@email.com");
         loginEmailText.setBorder(null);
 
         loginPasswordLabel.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
@@ -329,6 +329,8 @@ public class InicialUI extends javax.swing.JFrame {
         aboutPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 210, -1, -1));
 
         content.addTab("tab3", aboutPanel);
+
+        content.setSelectedIndex(1);
 
         getContentPane().add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1080, 670));
 

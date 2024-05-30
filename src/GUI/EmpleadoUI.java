@@ -66,6 +66,7 @@ public class EmpleadoUI extends javax.swing.JFrame {
         toolbar = new javax.swing.JPanel();
         logoImg = new javax.swing.JLabel();
         loggedUserNameLabel = new javax.swing.JLabel();
+        logoutBtn = new javax.swing.JLabel();
         content = new javax.swing.JTabbedPane();
         adminTabbedPane = new javax.swing.JTabbedPane();
         empleadosPanel = new javax.swing.JPanel();
@@ -125,24 +126,40 @@ public class EmpleadoUI extends javax.swing.JFrame {
         loggedUserNameLabel.setForeground(new java.awt.Color(255, 255, 255));
         loggedUserNameLabel.setText("Bienvenidx");
 
+        logoutBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ic_logout.png"))); // NOI18N
+        logoutBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        logoutBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoutBtnMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout toolbarLayout = new javax.swing.GroupLayout(toolbar);
         toolbar.setLayout(toolbarLayout);
         toolbarLayout.setHorizontalGroup(
             toolbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, toolbarLayout.createSequentialGroup()
                 .addGap(66, 66, 66)
-                .addComponent(loggedUserNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+                .addComponent(loggedUserNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(logoImg)
-                .addGap(56, 56, 56))
+                .addGap(16, 16, 16)
+                .addComponent(logoutBtn)
+                .addGap(16, 16, 16))
         );
         toolbarLayout.setVerticalGroup(
             toolbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(logoImg, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, toolbarLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(logoImg))
             .addGroup(toolbarLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(loggedUserNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, toolbarLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(logoutBtn)
+                .addGap(20, 20, 20))
         );
 
         getContentPane().add(toolbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, -1));
@@ -551,7 +568,7 @@ public class EmpleadoUI extends javax.swing.JFrame {
             cliEmailText.setEnabled(false);
             cliEmailText.setText(cliente.getEmail());
             cliPassText.setText(cliente.getPassword());
-            
+
             empSaveBtn.setText("Guardar");
         } else {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un cliente para editar.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -577,6 +594,19 @@ public class EmpleadoUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un cliente para eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_cliDeleteBtnActionPerformed
+
+    private void logoutBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutBtnMouseClicked
+        int result = JOptionPane.showConfirmDialog(this,
+                "¿Está seguro que desea cerrar la sesión?",
+                "Cerrar sesión",
+                JOptionPane.YES_NO_OPTION);
+
+        if (result == JOptionPane.YES_OPTION) {
+            InicialUI inicialUI = new InicialUI();
+            inicialUI.setVisible(true);
+            dispose();
+        }
+    }//GEN-LAST:event_logoutBtnMouseClicked
 
     private void loadEmpleados() {
         int totalEmpleados = Main.empleados().size();
@@ -637,7 +667,7 @@ public class EmpleadoUI extends javax.swing.JFrame {
     }
 
     private void loadClientes() {
-        
+
         int totalClientes = Main.clientes().size();
         String[] columnNames = {"Documento", "Nombre", "Email", "Reservas"};
         clientesTable.setModel(new DefaultTableModel(columnNames, totalClientes));
@@ -698,6 +728,7 @@ public class EmpleadoUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel loggedUserNameLabel;
     private javax.swing.JLabel logoImg;
+    private javax.swing.JLabel logoutBtn;
     private javax.swing.JTabbedPane recepcionTabbedPane;
     private javax.swing.JPanel reservasPanel;
     private javax.swing.JPanel toolbar;

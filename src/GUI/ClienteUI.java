@@ -4,11 +4,13 @@
  */
 package GUI;
 
+import GUI.panel.HabitacionesPanel;
 import KentHipos.Kensoft;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import modelo.Cliente;
 import modelo.Habitacion;
 import modelo.Reservacion;
@@ -41,12 +43,41 @@ public class ClienteUI extends javax.swing.JFrame {
             reservacionesPaginasTotales++;
         }
         initComponents();
+        
+        contentHabitaciones = new HabitacionesPanel(this);
+        contentHabitaciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        reservasPanel.add(contentHabitaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 640));
+        
         loggedUserNameLabel.setText("Bienvenidx, " + clienteLogged.getNombre());
         cargarReservaciones();
+        
+        menuReservasBtn.addActionListener(this::changePanel);
+        menuReservarBtn.addActionListener(this::changePanel);
+        menuPerfilBtn.addActionListener(this::changePanel);
 
         reservacionesPrevBtn.addActionListener(this::changeReservacionesPage);
         reservacionesNextBtn.addActionListener(this::changeReservacionesPage);
 
+    }
+    
+    private void changePanel(java.awt.event.ActionEvent evt) {
+        if (evt.getActionCommand().equals(menuReservasBtn.getActionCommand())) {
+            content.setSelectedIndex(0);
+        } else if (evt.getActionCommand().equals(menuReservarBtn.getActionCommand())) {
+            content.setSelectedIndex(1);
+        } else {
+            content.setSelectedIndex(2);
+        }
+        toggleMenu();
+    }
+    
+    private void toggleMenu() {
+        Kensoft animate = new Kensoft();
+        if (menu.getLocation().x == 0) {
+            animate.jPanelXLeft(0, -180, 1, 1, menu);
+        } else {
+            animate.jPanelXRight(-180, 0, 1, 1, menu);
+        }
     }
 
     /**
@@ -62,15 +93,21 @@ public class ClienteUI extends javax.swing.JFrame {
         logoImg = new javax.swing.JLabel();
         menuButton = new javax.swing.JLabel();
         loggedUserNameLabel = new javax.swing.JLabel();
+        logoutBtn = new javax.swing.JLabel();
         menu = new javax.swing.JPanel();
+        menuReservasBtn = new javax.swing.JButton();
+        menuReservarBtn = new javax.swing.JButton();
+        menuPerfilBtn = new javax.swing.JButton();
         content = new javax.swing.JTabbedPane();
-        main = new javax.swing.JPanel();
+        mainPanel = new javax.swing.JPanel();
         mainReservacionesPagPanel = new javax.swing.JPanel();
         reservacionesPrevBtn = new javax.swing.JButton();
         reservacionesPagLabel = new javax.swing.JLabel();
         reservacionesNextBtn = new javax.swing.JButton();
         mainReservacionesPanel = new javax.swing.JPanel();
         mainBackground = new javax.swing.JLabel();
+        reservasPanel = new javax.swing.JPanel();
+        perfilPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -95,6 +132,14 @@ public class ClienteUI extends javax.swing.JFrame {
         loggedUserNameLabel.setForeground(new java.awt.Color(255, 255, 255));
         loggedUserNameLabel.setText("Bienvenid@");
 
+        logoutBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ic_logout.png"))); // NOI18N
+        logoutBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        logoutBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoutBtnMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout toolbarLayout = new javax.swing.GroupLayout(toolbar);
         toolbar.setLayout(toolbarLayout);
         toolbarLayout.setHorizontalGroup(
@@ -103,10 +148,12 @@ public class ClienteUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(menuButton)
                 .addGap(18, 18, 18)
-                .addComponent(loggedUserNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(loggedUserNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 684, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addComponent(logoImg)
-                .addGap(56, 56, 56))
+                .addGap(16, 16, 16)
+                .addComponent(logoutBtn)
+                .addGap(16, 16, 16))
         );
         toolbarLayout.setVerticalGroup(
             toolbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,6 +166,10 @@ public class ClienteUI extends javax.swing.JFrame {
                     .addComponent(menuButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(loggedUserNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, toolbarLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(logoutBtn)
+                .addGap(18, 18, 18))
         );
 
         getContentPane().add(toolbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, -1));
@@ -128,15 +179,64 @@ public class ClienteUI extends javax.swing.JFrame {
         menu.setMinimumSize(new java.awt.Dimension(180, 720));
         menu.setPreferredSize(new java.awt.Dimension(180, 720));
 
+        menuReservasBtn.setBackground(new java.awt.Color(51, 51, 51));
+        menuReservasBtn.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+        menuReservasBtn.setForeground(new java.awt.Color(255, 255, 255));
+        menuReservasBtn.setText("Mis Reservas");
+        menuReservasBtn.setBorderPainted(false);
+        menuReservasBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        menuReservasBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuReservasBtnActionPerformed(evt);
+            }
+        });
+
+        menuReservarBtn.setBackground(new java.awt.Color(51, 51, 51));
+        menuReservarBtn.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+        menuReservarBtn.setForeground(new java.awt.Color(255, 255, 255));
+        menuReservarBtn.setText("Reservar");
+        menuReservarBtn.setBorderPainted(false);
+        menuReservarBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        menuReservarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuReservarBtnActionPerformed(evt);
+            }
+        });
+
+        menuPerfilBtn.setBackground(new java.awt.Color(51, 51, 51));
+        menuPerfilBtn.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+        menuPerfilBtn.setForeground(new java.awt.Color(255, 255, 255));
+        menuPerfilBtn.setText("Perfil");
+        menuPerfilBtn.setBorderPainted(false);
+        menuPerfilBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        menuPerfilBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuPerfilBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
         menu.setLayout(menuLayout);
         menuLayout.setHorizontalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 180, Short.MAX_VALUE)
+            .addGroup(menuLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(menuReservasBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+                    .addComponent(menuReservarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(menuPerfilBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         menuLayout.setVerticalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
+            .addGroup(menuLayout.createSequentialGroup()
+                .addGap(125, 125, 125)
+                .addComponent(menuReservasBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(menuReservarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(menuPerfilBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(433, Short.MAX_VALUE))
         );
 
         getContentPane().add(menu, new org.netbeans.lib.awtextra.AbsoluteConstraints(-180, 0, 180, 720));
@@ -146,10 +246,10 @@ public class ClienteUI extends javax.swing.JFrame {
         content.setMinimumSize(new java.awt.Dimension(900, 680));
         content.setPreferredSize(new java.awt.Dimension(900, 680));
 
-        main.setMaximumSize(new java.awt.Dimension(1080, 645));
-        main.setMinimumSize(new java.awt.Dimension(1080, 645));
-        main.setPreferredSize(new java.awt.Dimension(1080, 645));
-        main.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        mainPanel.setMaximumSize(new java.awt.Dimension(1080, 645));
+        mainPanel.setMinimumSize(new java.awt.Dimension(1080, 645));
+        mainPanel.setPreferredSize(new java.awt.Dimension(1080, 645));
+        mainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         mainReservacionesPagPanel.setLayout(new java.awt.GridLayout(1, 3));
 
@@ -168,16 +268,32 @@ public class ClienteUI extends javax.swing.JFrame {
         reservacionesNextBtn.setText(">");
         mainReservacionesPagPanel.add(reservacionesNextBtn);
 
-        main.add(mainReservacionesPagPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 590, 648, 30));
+        mainPanel.add(mainReservacionesPagPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 590, 648, 30));
 
         mainReservacionesPanel.setBackground(new java.awt.Color(51, 51, 51));
         mainReservacionesPanel.setLayout(new java.awt.GridLayout(5, 1));
-        main.add(mainReservacionesPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 64, 648, 516));
+        mainPanel.add(mainReservacionesPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 64, 648, 516));
 
         mainBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/inicio.jpg"))); // NOI18N
-        main.add(mainBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -70, -1, -1));
+        mainPanel.add(mainBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -70, -1, -1));
 
-        content.addTab("tab1", main);
+        content.addTab("tab1", mainPanel);
+
+        reservasPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        content.addTab("tab2", reservasPanel);
+
+        javax.swing.GroupLayout perfilPanelLayout = new javax.swing.GroupLayout(perfilPanel);
+        perfilPanel.setLayout(perfilPanelLayout);
+        perfilPanelLayout.setHorizontalGroup(
+            perfilPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1080, Short.MAX_VALUE)
+        );
+        perfilPanelLayout.setVerticalGroup(
+            perfilPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 645, Short.MAX_VALUE)
+        );
+
+        content.addTab("tab3", perfilPanel);
 
         getContentPane().add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1080, 680));
 
@@ -185,20 +301,40 @@ public class ClienteUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuButtonMouseClicked
-
-        Kensoft animate = new Kensoft();
-        if (menu.getLocation().x == 0) {
-            animate.jPanelXLeft(0, -180, 1, 1, menu);
-        } else {
-            animate.jPanelXRight(-180, 0, 1, 1, menu);
-        }
+        toggleMenu();
     }//GEN-LAST:event_menuButtonMouseClicked
 
     private void reservacionesPrevBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservacionesPrevBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_reservacionesPrevBtnActionPerformed
 
+    private void logoutBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutBtnMouseClicked
+        int result = JOptionPane.showConfirmDialog(this,
+                "¿Está seguro que desea cerrar la sesión?",
+                "Cerrar sesión",
+                JOptionPane.YES_NO_OPTION);
+
+        if (result == JOptionPane.YES_OPTION) {
+            InicialUI inicialUI = new InicialUI();
+            inicialUI.setVisible(true);
+            dispose();
+        }
+    }//GEN-LAST:event_logoutBtnMouseClicked
+
+    private void menuReservasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuReservasBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuReservasBtnActionPerformed
+
+    private void menuReservarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuReservarBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuReservarBtnActionPerformed
+
+    private void menuPerfilBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPerfilBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuPerfilBtnActionPerformed
+
     private void cargarReservaciones() {
+        contentHabitaciones.cargarHabitaciones();
         mainReservacionesPanel.removeAll();
         mainReservacionesPanel.revalidate();
         mainReservacionesPanel.repaint();
@@ -298,19 +434,27 @@ public class ClienteUI extends javax.swing.JFrame {
 
     }
 
+    private HabitacionesPanel contentHabitaciones;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane content;
     private javax.swing.JLabel loggedUserNameLabel;
     private javax.swing.JLabel logoImg;
-    private javax.swing.JPanel main;
+    private javax.swing.JLabel logoutBtn;
     private javax.swing.JLabel mainBackground;
+    private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel mainReservacionesPagPanel;
     private javax.swing.JPanel mainReservacionesPanel;
     private javax.swing.JPanel menu;
     private javax.swing.JLabel menuButton;
+    private javax.swing.JButton menuPerfilBtn;
+    private javax.swing.JButton menuReservarBtn;
+    private javax.swing.JButton menuReservasBtn;
+    private javax.swing.JPanel perfilPanel;
     private javax.swing.JButton reservacionesNextBtn;
     private javax.swing.JLabel reservacionesPagLabel;
     private javax.swing.JButton reservacionesPrevBtn;
+    private javax.swing.JPanel reservasPanel;
     private javax.swing.JPanel toolbar;
     // End of variables declaration//GEN-END:variables
 }
