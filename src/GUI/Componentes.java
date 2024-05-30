@@ -12,8 +12,8 @@ import modelo.Habitacion;
  * @author Usuario
  */
 public class Componentes {
-    
-    public static void buildHabitacioncard(Habitacion habitacion, int x, int y, javax.swing.JPanel contenedor, JFrame frame) {
+
+    public static void buildHabitacioncard(Habitacion habitacion, int x, int y, boolean showButton, javax.swing.JPanel contenedor, JFrame frame) {
         javax.swing.JPanel habitacionPanel = new javax.swing.JPanel();
         javax.swing.JPanel preciocontent = new javax.swing.JPanel();
         javax.swing.JLabel precioHabitacion = new javax.swing.JLabel();
@@ -64,11 +64,18 @@ public class Componentes {
         iconHabitacion.setIcon(new javax.swing.ImageIcon(frame.getClass().getResource(habitacion.getIcono())));
         habitacionPanel.add(iconHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 230));
 
-        Reservarbutton.setBackground(new java.awt.Color(0, 0, 0));
-        Reservarbutton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        Reservarbutton.setForeground(new java.awt.Color(255, 255, 255));
-        Reservarbutton.setText("Reservar");
-        habitacionPanel.add(Reservarbutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, -1, -1));
+        if (showButton) {
+            Reservarbutton.setBackground(new java.awt.Color(0, 0, 0));
+            Reservarbutton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+            Reservarbutton.setForeground(new java.awt.Color(255, 255, 255));
+            Reservarbutton.setText("Reservar");
+
+            Reservarbutton.addActionListener((e) -> {
+                ReservaUI reservaUI = new ReservaUI(habitacion);
+                reservaUI.setVisible(true);
+            });
+            habitacionPanel.add(Reservarbutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, -1, -1));
+        }
 
         tipoHabitacion.setFont(new java.awt.Font("Segoe UI", 1, 18));// NOI18N
         tipoHabitacion.setText(habitacion.getTipo().name() + " (" + habitacion.getNumero() + ")");
@@ -96,5 +103,5 @@ public class Componentes {
         contenedor.add(habitacionPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(x, y, 290, 390));
 
     }
-    
+
 }

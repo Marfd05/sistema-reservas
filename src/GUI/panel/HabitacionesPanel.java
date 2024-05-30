@@ -57,12 +57,12 @@ public class HabitacionesPanel extends JPanel {
         titlehome3body.setText("Habitaciones:");
         add(titlehome3body, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 260, 70));
         
-        Componentes.buildHabitacioncard(filtrados.get(0), 50, 140, this, parentFrame); // primer card
+        Componentes.buildHabitacioncard(filtrados.get(0), 50, 140, true, this, parentFrame); // primer card
         if (filtrados.size() > 1) {
-            Componentes.buildHabitacioncard(filtrados.get(1), 380, 140, this, parentFrame); //segunda card
+            Componentes.buildHabitacioncard(filtrados.get(1), 380, 140, true, this, parentFrame); //segunda card
         }
         if (filtrados.size() > 2) {
-            Componentes.buildHabitacioncard(filtrados.get(2), 715, 140, this, parentFrame); //tercer card
+            Componentes.buildHabitacioncard(filtrados.get(2), 715, 140, true, this, parentFrame); //tercer card
         }
         buildButtonhabitacion("<", 270);
         buildButtonhabitacion(">", 720);
