@@ -5,7 +5,10 @@
 package GUI;
 
 import enums.TipoPago;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import modelo.Cliente;
 import modelo.Habitacion;
 
@@ -16,15 +19,64 @@ import modelo.Habitacion;
 import modelo.Reservacion;
 import sistemareserva.Main;
 
-public class Reserva extends javax.swing.JFrame {
+public class ReservaUI extends javax.swing.JFrame {
 
+    private Habitacion habitacion;
     TipoPago selectedTipopago;
+    Date Fechainicio;
+    Date Fechafin;
+    double total;
+    boolean esNuevo = false;
 
     /**
      * Creates new form Reserva
      */
-    public Reserva() {
+    public ReservaUI() {
         initComponents();
+    }
+
+    public ReservaUI(Habitacion habitacion) {
+        this.habitacion = habitacion;
+        initComponents();
+
+        loadHabitacion();
+
+        if (ComboboxTipopago.getItemCount() == 0) {
+            for (TipoPago tipopago : TipoPago.values()) {
+                ComboboxTipopago.addItem(tipopago.name());
+            }
+
+            ComboboxTipopago.addItemListener((e) -> {
+                selectedTipopago = TipoPago.valueOf(ComboboxTipopago.getSelectedItem().toString());
+            });
+        }
+        selectedTipopago = TipoPago.EFECTIVO;
+        Dateinicio.addPropertyChangeListener((evt) -> {
+            Fechainicio = (Date) evt.getNewValue();
+            calcularTotal();
+            Datefin.setDate(null);
+        });
+        Datefin.addPropertyChangeListener((evt) -> {
+            Fechafin = (Date) evt.getNewValue();
+            if (Fechafin != null) {
+                if (Fechafin.getTime() > Fechainicio.getTime()) {
+                    calcularTotal();
+                } else {
+                    Datefin.setDate(null);
+                }
+            }
+
+        });
+    }
+
+    private void calcularTotal() {
+        if (Fechainicio != null && Fechafin != null) {
+            long time = Fechafin.getTime() - Fechainicio.getTime();
+            int dias = (int) (time / 1000 / 60 / 60 / 24);
+
+            total = dias * habitacion.getPrecioPorNoche();
+            Totallabel.setText("Total: $ " + total);
+        }
     }
 
     /**
@@ -70,18 +122,12 @@ public class Reserva extends javax.swing.JFrame {
         contentReserva.setBackground(new java.awt.Color(255, 255, 255));
         contentReserva.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout visualHabitacionReservarLayout = new javax.swing.GroupLayout(visualHabitacionReservar);
-        visualHabitacionReservar.setLayout(visualHabitacionReservarLayout);
-        visualHabitacionReservarLayout.setHorizontalGroup(
-            visualHabitacionReservarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 290, Short.MAX_VALUE)
-        );
-        visualHabitacionReservarLayout.setVerticalGroup(
-            visualHabitacionReservarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 390, Short.MAX_VALUE)
-        );
-
-        contentReserva.add(visualHabitacionReservar, new org.netbeans.lib.awtextra.AbsoluteConstraints(753, 91, -1, -1));
+        visualHabitacionReservar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        visualHabitacionReservar.setMaximumSize(new java.awt.Dimension(292, 392));
+        visualHabitacionReservar.setMinimumSize(new java.awt.Dimension(292, 392));
+        visualHabitacionReservar.setPreferredSize(new java.awt.Dimension(292, 392));
+        visualHabitacionReservar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        contentReserva.add(visualHabitacionReservar, new org.netbeans.lib.awtextra.AbsoluteConstraints(753, 91, 292, 392));
 
         labelDatosPersonales.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         labelDatosPersonales.setText("Datos Personales:");
@@ -202,36 +248,40 @@ public class Reserva extends javax.swing.JFrame {
 
     private void realizarReservacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realizarReservacionActionPerformed
 
+        reservaAction();
 
     }//GEN-LAST:event_realizarReservacionActionPerformed
 
-    private void ReservaMotion (){
-        
+    private void loadHabitacion() {
+        Componentes.buildHabitacioncard(habitacion, 1, 1, false, visualHabitacionReservar, this);
     }
-    private void reservaAction(Habitacion habitacion) {
-        
-        Cliente cliente = FindorcreateCliente ();
 
-        Date Fechainicio = Dateinicio.getDate();
-        Date Fechafin = Datefin.getDate();
-        
-        long time = Fechafin.getTime() - Fechainicio.getTime();
-        int dias = (int)(time / 1000 / 60 / 60 / 24);
-        
+    private void reservaAction() {
 
-        if (ComboboxTipopago.getItemCount() == 0) {
-            for (TipoPago tipopago : TipoPago.values()) {
-                ComboboxTipopago.addItem(tipopago.name());
+        Cliente cliente = FindorcreateCliente();
+        if (cliente != null) {
+            Fechainicio = Dateinicio.getDate();
+            Fechafin = Datefin.getDate();
+
+            if (Fechainicio != null && Fechafin != null) {
+                Reservacion reservacion = new Reservacion(Fechainicio, Fechafin, habitacion, cliente, total, selectedTipopago);
+                Main.hotel.getReservaciones().crear(reservacion);
+                String message = "";
+                if(esNuevo){
+                    message = "Se creó la reservación. Su usuario y contraseña para el inicio de sesión son su email y documento respectivamente.";
+                } else {
+                    message = "Se creó la reservación.";
+                }
+                
+                JOptionPane.showMessageDialog(this, message, "Correcto", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+                
+            } else {
+                JOptionPane.showMessageDialog(this, "Se deben ingresar las fechas.", "Error", JOptionPane.ERROR_MESSAGE);
             }
-
-            ComboboxTipopago.addItemListener((e) -> {
-                selectedTipopago = TipoPago.valueOf(ComboboxTipopago.getSelectedItem().toString());
-            });
+        } else {
+            JOptionPane.showMessageDialog(this, "Se deben ingresar los datos personales.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        double total = dias * habitacion.getPrecioPorNoche();
-        Totallabel.setText("Total: $ " + total);
-
-        Reservacion reservacion = new Reservacion(Fechainicio, Fechafin, habitacion, cliente, total, selectedTipopago);
 
     }
 
@@ -239,54 +289,25 @@ public class Reserva extends javax.swing.JFrame {
 
         String Email = EmailDatosPersonales.getText();
         String Documento = DocumentoDatosPersonales.getText();
+        String Nombre = NombreDatosPersonales.getText();
 
-        Cliente clienteReservacion = null;
+        if (!Email.isEmpty() && !Documento.isEmpty() && !Nombre.isEmpty()) {
+            Cliente clienteReservacion = null;
 
-        for (Cliente cliente : Main.clientes()) {
-            if (cliente.getEmail().equals(Email) && cliente.getDocumento().equals(Documento)) {
-                clienteReservacion = cliente;
-            }
-        }
-        if (clienteReservacion == null) {
-            clienteReservacion = new Cliente(Documento, NombreDatosPersonales.getText(), Email);
-            Main.hotel.getClientes().crear(clienteReservacion);
-        }
-        return clienteReservacion;
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+            for (Cliente cliente : Main.clientes()) {
+                if (cliente.getEmail().equals(Email) && cliente.getDocumento().equals(Documento)) {
+                    clienteReservacion = cliente;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Reserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Reserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Reserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Reserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Reserva().setVisible(true);
+            if (clienteReservacion == null) {
+                clienteReservacion = new Cliente(Documento, Nombre, Email, Documento);
+                Main.hotel.getClientes().crear(clienteReservacion);
+                esNuevo = true;
             }
-        });
+            return clienteReservacion;
+        } else {
+            return null;
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -316,4 +337,5 @@ public class Reserva extends javax.swing.JFrame {
     private javax.swing.JLabel tipoPagolabel;
     private javax.swing.JPanel visualHabitacionReservar;
     // End of variables declaration//GEN-END:variables
+
 }

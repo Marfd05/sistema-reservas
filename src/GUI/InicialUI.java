@@ -61,6 +61,7 @@ public class InicialUI extends javax.swing.JFrame {
         fot2bodyhome2 = new javax.swing.JLabel();
         titulo2bodyhome = new javax.swing.JLabel();
         descripcionHotelhome2body = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         body3home = new javax.swing.JPanel();
         loginPanel = new javax.swing.JPanel();
         loginFormPanel = new javax.swing.JPanel();
@@ -72,7 +73,13 @@ public class InicialUI extends javax.swing.JFrame {
         loginErrorMessage = new javax.swing.JLabel();
         loginBackground = new javax.swing.JLabel();
         aboutPanel = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        scrollAboutpage1 = new javax.swing.JScrollPane();
+        ContentAboutScroll1 = new javax.swing.JPanel();
+        body1About1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        body2About1 = new javax.swing.JPanel();
+        body3About1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -237,6 +244,22 @@ public class InicialUI extends javax.swing.JFrame {
         descripcionHotelhome2body.setForeground(new java.awt.Color(255, 255, 255,180));
         body2home.add(descripcionHotelhome2body, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 330, 360));
 
+        jButton1.setBackground(new java.awt.Color(231, 231, 231));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setText("Leer Mas ");
+        jButton1.setBorder(null);
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        body2home.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 560, 90, 40));
+
         ContentHomeScroll.add(body2home, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 630, 1070, 660));
 
         body3home.setBackground(new java.awt.Color(0, 0, 0,160));
@@ -325,8 +348,42 @@ public class InicialUI extends javax.swing.JFrame {
 
         aboutPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setText("about");
-        aboutPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 210, -1, -1));
+        scrollAboutpage1.setBorder(null);
+        scrollAboutpage1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollAboutpage1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollAboutpage1.setHorizontalScrollBar(null);
+        scrollAboutpage1.setPreferredSize(new java.awt.Dimension(1080, 1890));
+
+        ContentAboutScroll1.setBackground(new java.awt.Color(0, 0, 0));
+        ContentAboutScroll1.setPreferredSize(new java.awt.Dimension(1080, 1930));
+        ContentAboutScroll1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        body1About1.setBackground(new java.awt.Color(0, 0, 0));
+        body1About1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Aboutus.jpg"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        body1About1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 315));
+
+        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel2.setFont(new java.awt.Font("Constantia", 3, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Sobre Nosostros");
+        body1About1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(377, 96, 290, 80));
+
+        ContentAboutScroll1.add(body1About1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 630));
+
+        body2About1.setBackground(new java.awt.Color(0, 0, 0));
+        body2About1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        ContentAboutScroll1.add(body2About1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 630, 1070, 660));
+
+        body3About1.setBackground(new java.awt.Color(0, 0, 0,160));
+        body3About1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        ContentAboutScroll1.add(body3About1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 1290, 1070, 640));
+
+        scrollAboutpage1.setViewportView(ContentAboutScroll1);
+
+        aboutPanel.add(scrollAboutpage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1080, 630));
 
         content.addTab("tab3", aboutPanel);
 
@@ -351,6 +408,14 @@ public class InicialUI extends javax.swing.JFrame {
     private void menuHomeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuHomeBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menuHomeBtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        content.setSelectedIndex(2);
+    }//GEN-LAST:event_jButton1MouseClicked
 
     private void changePanel(java.awt.event.ActionEvent evt) {
         if (evt.getActionCommand().equals(menuHomeBtn.getActionCommand())) {
@@ -448,11 +513,15 @@ public class InicialUI extends javax.swing.JFrame {
     private HabitacionesPanel contentHabitaciones;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel ContentAboutScroll1;
     private javax.swing.JPanel ContentHomeScroll;
     private javax.swing.JPanel aboutPanel;
     private javax.swing.JLabel backgroundhome;
+    private javax.swing.JPanel body1About1;
     private javax.swing.JPanel body1home;
+    private javax.swing.JPanel body2About1;
     private javax.swing.JPanel body2home;
+    private javax.swing.JPanel body3About1;
     private javax.swing.JPanel body3home;
     private javax.swing.JPanel borderhedadhome;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -462,7 +531,9 @@ public class InicialUI extends javax.swing.JFrame {
     private javax.swing.JLabel foto2bodyhome;
     private javax.swing.JLabel fraseHome;
     private javax.swing.JPanel homePanel;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JButton loginActionBtn;
     private javax.swing.JLabel loginBackground;
     private javax.swing.JLabel loginEmailLabel;
@@ -478,6 +549,7 @@ public class InicialUI extends javax.swing.JFrame {
     private javax.swing.JLabel menuButton;
     private javax.swing.JButton menuHomeBtn;
     private javax.swing.JButton menuLoginBtn;
+    private javax.swing.JScrollPane scrollAboutpage1;
     private javax.swing.JScrollPane scrollHomepage;
     private javax.swing.JLabel titulo2bodyhome;
     private javax.swing.JPanel toolbar;
