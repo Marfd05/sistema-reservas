@@ -43,14 +43,15 @@ public class ClienteUI extends javax.swing.JFrame {
             reservacionesPaginasTotales++;
         }
         initComponents();
-        
+        loadPerfil();
+
         contentHabitaciones = new HabitacionesPanel(this);
         contentHabitaciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         reservasPanel.add(contentHabitaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 640));
-        
+
         loggedUserNameLabel.setText("Bienvenidx, " + clienteLogged.getNombre());
         cargarReservaciones();
-        
+
         menuReservasBtn.addActionListener(this::changePanel);
         menuReservarBtn.addActionListener(this::changePanel);
         menuPerfilBtn.addActionListener(this::changePanel);
@@ -59,7 +60,7 @@ public class ClienteUI extends javax.swing.JFrame {
         reservacionesNextBtn.addActionListener(this::changeReservacionesPage);
 
     }
-    
+
     private void changePanel(java.awt.event.ActionEvent evt) {
         if (evt.getActionCommand().equals(menuReservasBtn.getActionCommand())) {
             content.setSelectedIndex(0);
@@ -70,7 +71,7 @@ public class ClienteUI extends javax.swing.JFrame {
         }
         toggleMenu();
     }
-    
+
     private void toggleMenu() {
         Kensoft animate = new Kensoft();
         if (menu.getLocation().x == 0) {
@@ -78,6 +79,13 @@ public class ClienteUI extends javax.swing.JFrame {
         } else {
             animate.jPanelXRight(-180, 0, 1, 1, menu);
         }
+    }
+
+    private void loadPerfil() {
+        documentoText.setText(clienteLogged.getDocumento());
+        nombreText.setText(clienteLogged.getNombre());
+        emailText.setText(clienteLogged.getEmail());
+        passText.setText(clienteLogged.getPassword());
     }
 
     /**
@@ -108,6 +116,17 @@ public class ClienteUI extends javax.swing.JFrame {
         mainBackground = new javax.swing.JLabel();
         reservasPanel = new javax.swing.JPanel();
         perfilPanel = new javax.swing.JPanel();
+        perfilFormPanel = new javax.swing.JPanel();
+        documentoLabel = new javax.swing.JLabel();
+        documentoText = new javax.swing.JTextField();
+        nombreLabel = new javax.swing.JLabel();
+        nombreText = new javax.swing.JTextField();
+        emailLabel = new javax.swing.JLabel();
+        emailText = new javax.swing.JTextField();
+        passLabel = new javax.swing.JLabel();
+        passText = new javax.swing.JTextField();
+        jSeparator1 = new javax.swing.JSeparator();
+        editButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -282,15 +301,60 @@ public class ClienteUI extends javax.swing.JFrame {
         reservasPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         content.addTab("tab2", reservasPanel);
 
+        perfilFormPanel.setLayout(new java.awt.GridLayout(10, 1));
+
+        documentoLabel.setText("Documento");
+        perfilFormPanel.add(documentoLabel);
+
+        documentoText.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        documentoText.setEnabled(false);
+        perfilFormPanel.add(documentoText);
+
+        nombreLabel.setText("Nombre");
+        perfilFormPanel.add(nombreLabel);
+
+        nombreText.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        nombreText.setEnabled(false);
+        perfilFormPanel.add(nombreText);
+
+        emailLabel.setText("Email");
+        perfilFormPanel.add(emailLabel);
+
+        emailText.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        emailText.setEnabled(false);
+        perfilFormPanel.add(emailText);
+
+        passLabel.setText("Contraseña");
+        perfilFormPanel.add(passLabel);
+
+        passText.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        passText.setEnabled(false);
+        perfilFormPanel.add(passText);
+        perfilFormPanel.add(jSeparator1);
+
+        editButton.setText("Editar");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
+        perfilFormPanel.add(editButton);
+
         javax.swing.GroupLayout perfilPanelLayout = new javax.swing.GroupLayout(perfilPanel);
         perfilPanel.setLayout(perfilPanelLayout);
         perfilPanelLayout.setHorizontalGroup(
             perfilPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1080, Short.MAX_VALUE)
+            .addGroup(perfilPanelLayout.createSequentialGroup()
+                .addGap(257, 257, 257)
+                .addComponent(perfilFormPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(259, Short.MAX_VALUE))
         );
         perfilPanelLayout.setVerticalGroup(
             perfilPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 645, Short.MAX_VALUE)
+            .addGroup(perfilPanelLayout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(perfilFormPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(223, Short.MAX_VALUE))
         );
 
         content.addTab("tab3", perfilPanel);
@@ -332,6 +396,37 @@ public class ClienteUI extends javax.swing.JFrame {
     private void menuPerfilBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPerfilBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menuPerfilBtnActionPerformed
+
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        if (editButton.getText().equals("Editar")) {
+            nombreText.setEnabled(true);
+            passText.setEnabled(true);
+            editButton.setText("Guardar");
+        } else {
+
+            if (!nombreText.getText().isEmpty() && !passText.getText().isEmpty()) {
+
+                int index = -1;
+                for (int i = 0; i < Main.clientes().size(); i++) {
+                    Cliente cliente = Main.clientes().get(i);
+                    if (cliente.getDocumento().equals(clienteLogged.getDocumento())) {
+                        index = i;
+                    }
+                }
+                
+                clienteLogged.setNombre(nombreText.getText());
+                clienteLogged.setPassword(passText.getText());
+                Main.hotel.getClientes().actualizar(index, clienteLogged);
+
+                nombreText.setEnabled(false);
+                passText.setEnabled(false);
+                editButton.setText("Edit");
+            } else {
+                JOptionPane.showMessageDialog(this, "Debe llenar todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        }
+    }//GEN-LAST:event_editButtonActionPerformed
 
     private void cargarReservaciones() {
         contentHabitaciones.cargarHabitaciones();
@@ -435,9 +530,15 @@ public class ClienteUI extends javax.swing.JFrame {
     }
 
     private HabitacionesPanel contentHabitaciones;
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane content;
+    private javax.swing.JLabel documentoLabel;
+    private javax.swing.JTextField documentoText;
+    private javax.swing.JButton editButton;
+    private javax.swing.JLabel emailLabel;
+    private javax.swing.JTextField emailText;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel loggedUserNameLabel;
     private javax.swing.JLabel logoImg;
     private javax.swing.JLabel logoutBtn;
@@ -450,6 +551,11 @@ public class ClienteUI extends javax.swing.JFrame {
     private javax.swing.JButton menuPerfilBtn;
     private javax.swing.JButton menuReservarBtn;
     private javax.swing.JButton menuReservasBtn;
+    private javax.swing.JLabel nombreLabel;
+    private javax.swing.JTextField nombreText;
+    private javax.swing.JLabel passLabel;
+    private javax.swing.JTextField passText;
+    private javax.swing.JPanel perfilFormPanel;
     private javax.swing.JPanel perfilPanel;
     private javax.swing.JButton reservacionesNextBtn;
     private javax.swing.JLabel reservacionesPagLabel;

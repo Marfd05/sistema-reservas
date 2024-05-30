@@ -113,6 +113,7 @@ public class ReservaUI extends javax.swing.JFrame {
         ComboboxTipopago = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         realizarReservacion = new javax.swing.JButton();
+        cancelarBtn = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
@@ -237,6 +238,15 @@ public class ReservaUI extends javax.swing.JFrame {
         });
         contentReserva.add(realizarReservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(779, 509, 246, 47));
 
+        cancelarBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        cancelarBtn.setText("Cancelar");
+        cancelarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarBtnActionPerformed(evt);
+            }
+        });
+        contentReserva.add(cancelarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 570, 240, 40));
+
         getContentPane().add(contentReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 650));
 
         pack();
@@ -247,10 +257,12 @@ public class ReservaUI extends javax.swing.JFrame {
     }//GEN-LAST:event_NombreDatosPersonalesActionPerformed
 
     private void realizarReservacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realizarReservacionActionPerformed
-
         reservaAction();
-
     }//GEN-LAST:event_realizarReservacionActionPerformed
+
+    private void cancelarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarBtnActionPerformed
+        dispose();
+    }//GEN-LAST:event_cancelarBtnActionPerformed
 
     private void loadHabitacion() {
         Componentes.buildHabitacioncard(habitacion, 1, 1, false, visualHabitacionReservar, this);
@@ -322,6 +334,7 @@ public class ReservaUI extends javax.swing.JFrame {
     private javax.swing.JTextField NombreDatosPersonales;
     private javax.swing.JLabel Nombrelabel;
     private javax.swing.JLabel Totallabel;
+    private javax.swing.JButton cancelarBtn;
     private javax.swing.JPanel contentReserva;
     private javax.swing.JPanel datosClientereservacontent;
     private javax.swing.JPanel datosPagoreservacontent;
