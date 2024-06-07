@@ -43,7 +43,7 @@ public class Main {
                     + "Con habitaciones elegantemente decoradas, un restaurante gourmet, un spa de clase mundial y vistas impresionantes de la ciudad, "
                     + "nuestro hotel está diseñado para proporcionar una experiencia inolvidable. Ya sea que viajes por negocios o placer, "
                     + "en Paradise Hotel encontrarás el refugio perfecto donde cada detalle está pensado para tu máxima comodidad y satisfacción.");
-        cargarDatosIniciales();
+        //cargarDatosIniciales();
         
         InicialUI paginaInicial = new InicialUI();
         paginaInicial.setVisible(true);

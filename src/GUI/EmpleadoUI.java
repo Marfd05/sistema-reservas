@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Empleado;
+import modelo.Habitacion;
 import sistemareserva.Main;
 
 /**
@@ -57,8 +58,11 @@ public class EmpleadoUI extends javax.swing.JFrame {
                 
                 habitacionesPanel.cargarHabitaciones();
             }
-            case RolUsuario.LIMPIEZA ->
+            case RolUsuario.LIMPIEZA -> {
                 content.setSelectedIndex(2);
+                loadHabitacionesACargo();
+            }
+                
         }
     }
 
@@ -101,6 +105,9 @@ public class EmpleadoUI extends javax.swing.JFrame {
         empHabitacionesList = new javax.swing.JList<>();
         empHabitacionesLabel = new javax.swing.JLabel();
         recepcionTabbedPane = new javax.swing.JTabbedPane();
+        limpiezaPanel = new javax.swing.JPanel();
+        limpiezaScrollPane = new javax.swing.JScrollPane();
+        limpiezaTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -278,6 +285,25 @@ public class EmpleadoUI extends javax.swing.JFrame {
         recepcionTabbedPane.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
         content.addTab("tab2", recepcionTabbedPane);
 
+        limpiezaPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        limpiezaTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "# Habitación", "Tipo", "Estado"
+            }
+        ));
+        limpiezaScrollPane.setViewportView(limpiezaTable);
+
+        limpiezaPanel.add(limpiezaScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 760, 280));
+
+        content.addTab("tab3", limpiezaPanel);
+
         getContentPane().add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1080, 680));
 
         pack();
@@ -412,6 +438,19 @@ public class EmpleadoUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_logoutBtnMouseClicked
 
+    private void loadHabitacionesACargo() {
+        int totalHabitaciones = empleadoLogged.getHabitacionesAsiganadas().size();
+        String[] columnNames = {"# Habitación", "Tipo", "Estado"};
+        limpiezaTable.setModel(new DefaultTableModel(columnNames, totalHabitaciones));
+        
+        for(int i=0; i<totalHabitaciones; i++) {
+            Habitacion habitacion = empleadoLogged.getHabitacionesAsiganadas().get(i);
+            limpiezaTable.getModel().setValueAt(habitacion.getNumero(), i, 0);
+            limpiezaTable.getModel().setValueAt(habitacion.getTipo().name(), i, 1);
+            limpiezaTable.getModel().setValueAt(habitacion.getEstado().name(), i, 2);
+        }
+    }
+    
     private void loadEmpleados() {
         int totalEmpleados = Main.empleados().size();
         String[] columnNames = {"Documento", "Nombre", "Email", "Rol", "Supervisor"};
@@ -499,6 +538,9 @@ public class EmpleadoUI extends javax.swing.JFrame {
     private javax.swing.JTable empleadosTable;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel limpiezaPanel;
+    private javax.swing.JScrollPane limpiezaScrollPane;
+    private javax.swing.JTable limpiezaTable;
     private javax.swing.JLabel loggedUserNameLabel;
     private javax.swing.JLabel logoImg;
     private javax.swing.JLabel logoutBtn;
