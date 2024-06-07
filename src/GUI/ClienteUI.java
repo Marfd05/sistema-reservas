@@ -8,8 +8,6 @@ import GUI.panel.HabitacionesPanel;
 import KentHipos.Kensoft;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelo.Cliente;
 import modelo.Habitacion;
