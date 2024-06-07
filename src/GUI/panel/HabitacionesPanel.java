@@ -13,7 +13,7 @@ import sistemareserva.Main;
 
 /**
  *
- * @author RaikerXV
+ * @author Usuario
  */
 public class HabitacionesPanel extends JPanel {
 

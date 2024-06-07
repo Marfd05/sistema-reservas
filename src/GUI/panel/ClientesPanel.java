@@ -12,7 +12,7 @@ import sistemareserva.Main;
 
 /**
  *
- * @author RaikerXV
+ * @author Usuario
  */
 public class ClientesPanel extends JPanel {
 
