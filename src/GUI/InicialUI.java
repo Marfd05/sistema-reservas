@@ -2,6 +2,7 @@ package GUI;
 
 import GUI.panel.HabitacionesPanel;
 import KentHipos.Kensoft;
+import static javax.swing.SwingConstants.CENTER;
 import modelo.Cliente;
 import modelo.Empleado;
 import sistemareserva.Main;
@@ -29,6 +30,7 @@ public class InicialUI extends javax.swing.JFrame {
         loginActionBtn.addActionListener(this::loginAction);
         
         homecreation();
+        Aboutuscreation();
     }
 
     /**
@@ -76,10 +78,28 @@ public class InicialUI extends javax.swing.JFrame {
         scrollAboutpage1 = new javax.swing.JScrollPane();
         ContentAboutScroll1 = new javax.swing.JPanel();
         body1About1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        AboutusText = new javax.swing.JLabel();
+        titleSobrenosotrosAbout = new javax.swing.JLabel();
+        backgroundAbout = new javax.swing.JLabel();
         body2About1 = new javax.swing.JPanel();
+        backbody2about = new javax.swing.JLabel();
+        Nuestrahistoriatext = new javax.swing.JLabel();
+        Nuestramisiontext = new javax.swing.JLabel();
+        nuestrahistoria = new javax.swing.JLabel();
+        nuestramision = new javax.swing.JLabel();
         body3About1 = new javax.swing.JPanel();
+        aboutfoto2 = new javax.swing.JLabel();
+        aboutfoto1 = new javax.swing.JLabel();
+        Nuestrahistoriatext1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        nombre = new javax.swing.JLabel();
+        dirreccion = new javax.swing.JLabel();
+        telefonomovil = new javax.swing.JLabel();
+        fax = new javax.swing.JLabel();
+        nit = new javax.swing.JLabel();
+        email = new javax.swing.JLabel();
+        uperinformationboarder = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -272,6 +292,7 @@ public class InicialUI extends javax.swing.JFrame {
 
         content.addTab("tab1", homePanel);
 
+        loginPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         loginPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         loginFormPanel.setBackground(new java.awt.Color(0, 0, 0, 210));
@@ -283,7 +304,6 @@ public class InicialUI extends javax.swing.JFrame {
 
         loginEmailText.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         loginEmailText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        loginEmailText.setText("maria@email.com");
         loginEmailText.setBorder(null);
 
         loginPasswordLabel.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
@@ -292,7 +312,6 @@ public class InicialUI extends javax.swing.JFrame {
 
         loginPasswordText.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         loginPasswordText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        loginPasswordText.setText("123456");
         loginPasswordText.setBorder(null);
 
         loginActionBtn.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
@@ -361,24 +380,114 @@ public class InicialUI extends javax.swing.JFrame {
         body1About1.setBackground(new java.awt.Color(0, 0, 0));
         body1About1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Aboutus.jpg"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        body1About1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 315));
+        AboutusText.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        AboutusText.setForeground(new java.awt.Color(255, 255, 255));
+        AboutusText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        AboutusText.setToolTipText("");
+        AboutusText.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        body1About1.add(AboutusText, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 340, 920, 250));
 
-        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel2.setFont(new java.awt.Font("Constantia", 3, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Sobre Nosostros");
-        body1About1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(377, 96, 290, 80));
+        titleSobrenosotrosAbout.setBackground(new java.awt.Color(0, 0, 0));
+        titleSobrenosotrosAbout.setFont(new java.awt.Font("Constantia", 3, 48)); // NOI18N
+        titleSobrenosotrosAbout.setForeground(new java.awt.Color(255, 255, 255));
+        titleSobrenosotrosAbout.setText("Sobre Nosostros");
+        body1About1.add(titleSobrenosotrosAbout, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, 380, 80));
+
+        backgroundAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Aboutus.jpg"))); // NOI18N
+        backgroundAbout.setText("jLabel1");
+        body1About1.add(backgroundAbout, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 315));
 
         ContentAboutScroll1.add(body1About1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 630));
 
         body2About1.setBackground(new java.awt.Color(0, 0, 0));
         body2About1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        backbody2about.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Nuestrahistoria.jpg"))); // NOI18N
+        body2About1.add(backbody2about, new org.netbeans.lib.awtextra.AbsoluteConstraints(667, 0, 410, 660));
+
+        Nuestrahistoriatext.setBackground(new java.awt.Color(0, 0, 0));
+        Nuestrahistoriatext.setFont(new java.awt.Font("SansSerif", 2, 24)); // NOI18N
+        Nuestrahistoriatext.setForeground(new java.awt.Color(255, 255, 255));
+        Nuestrahistoriatext.setText("Nuestra Historia ");
+        body2About1.add(Nuestrahistoriatext, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, 190, 50));
+
+        Nuestramisiontext.setBackground(new java.awt.Color(0, 0, 0));
+        Nuestramisiontext.setFont(new java.awt.Font("SansSerif", 2, 24)); // NOI18N
+        Nuestramisiontext.setForeground(new java.awt.Color(255, 255, 255));
+        Nuestramisiontext.setText("Nuestra Misión");
+        body2About1.add(Nuestramisiontext, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, 160, 50));
+
+        nuestrahistoria.setFont(new java.awt.Font("SansSerif", 2, 18)); // NOI18N
+        nuestrahistoria.setForeground(new java.awt.Color(255, 255, 255));
+        body2About1.add(nuestrahistoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 500, 230));
+
+        nuestramision.setFont(new java.awt.Font("SansSerif", 2, 18)); // NOI18N
+        nuestramision.setForeground(new java.awt.Color(255, 255, 255));
+        body2About1.add(nuestramision, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 390, 500, 230));
+
         ContentAboutScroll1.add(body2About1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 630, 1070, 660));
 
-        body3About1.setBackground(new java.awt.Color(0, 0, 0,160));
+        body3About1.setBackground(new java.awt.Color(0, 0, 0));
         body3About1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        aboutfoto2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        aboutfoto2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/aboutus4.jpg"))); // NOI18N
+        body3About1.add(aboutfoto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 170, 310, 330));
+
+        aboutfoto1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        aboutfoto1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/aboutus3.jpg"))); // NOI18N
+        aboutfoto1.setToolTipText("");
+        aboutfoto1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        body3About1.add(aboutfoto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 300, 360));
+
+        Nuestrahistoriatext1.setBackground(new java.awt.Color(0, 0, 0));
+        Nuestrahistoriatext1.setFont(new java.awt.Font("SansSerif", 2, 24)); // NOI18N
+        Nuestrahistoriatext1.setForeground(new java.awt.Color(255, 255, 255));
+        Nuestrahistoriatext1.setText("Nuestros Servicios ");
+        body3About1.add(Nuestrahistoriatext1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 30, 210, 50));
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/servicios.jpg"))); // NOI18N
+        body3About1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 90, 240, 410));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new java.awt.GridLayout(3, 2));
+
+        nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(nombre);
+
+        dirreccion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(dirreccion);
+
+        telefonomovil.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(telefonomovil);
+
+        fax.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(fax);
+
+        nit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(nit);
+
+        email.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(email);
+
+        body3About1.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 550, 1070, 90));
+
+        uperinformationboarder.setBackground(new java.awt.Color(204, 204, 204));
+
+        javax.swing.GroupLayout uperinformationboarderLayout = new javax.swing.GroupLayout(uperinformationboarder);
+        uperinformationboarder.setLayout(uperinformationboarderLayout);
+        uperinformationboarderLayout.setHorizontalGroup(
+            uperinformationboarderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1070, Short.MAX_VALUE)
+        );
+        uperinformationboarderLayout.setVerticalGroup(
+            uperinformationboarderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 10, Short.MAX_VALUE)
+        );
+
+        body3About1.add(uperinformationboarder, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 540, 1070, 10));
+
         ContentAboutScroll1.add(body3About1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 1290, 1070, 640));
 
         scrollAboutpage1.setViewportView(ContentAboutScroll1);
@@ -386,8 +495,6 @@ public class InicialUI extends javax.swing.JFrame {
         aboutPanel.add(scrollAboutpage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1080, 630));
 
         content.addTab("tab3", aboutPanel);
-
-        content.setSelectedIndex(1);
 
         getContentPane().add(content, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1080, 670));
 
@@ -477,6 +584,29 @@ public class InicialUI extends javax.swing.JFrame {
         //cargarHabitaciones();
 
     }
+    
+    private void Aboutuscreation(){
+    AboutusText.setText("<html><p style='text-align: center;'>Ubicado en el corazón de un paraíso exótico,<br> Paradise Hotel ofrece una experiencia inigualable de lujo, confort y serenidad.<br>"
+            + "Nuestro hotel es un refugio para viajeros que buscan una estadía inolvidable,<br> ya sea por placer, negocios o una ocasión especial.<br>"
+            + "En Paradise Hotel,nos enorgullece ofrecer un servicio excepcional,<br>alojamientos elegantes y comodidades de clase mundial.</html>");
+  
+    
+    nuestramision.setText("<html><p style='text-align: center;'>Nuestra misión en Paradise Hotel es ofrecer una experiencia de huésped excepcional que supere las expectativas.<br>"
+            + "Queremos crear recuerdos duraderos proporcionando un servicio sobresaliente,<br>"
+            + "alojamientos lujosos y una variedad de comodidades adaptadas para satisfacer las diversas necesidades de nuestros huéspedes.<br>"
+            + "Estamos dedicados a hacer que su estadía con nosotros sea una experiencia verdaderamente inolvidable.</html>");
+    
+    nuestrahistoria.setText("<html><p style='text-align: center;'>Paradise Hotel fue fundado con la visión de crear un santuario donde los huéspedes puedan escapar del ajetreo y el bullicio de la vida cotidiana.<br>"
+            + "Desde nuestro inicio, hemos estado comprometidos con ofrecer una combinación única de hospitalidad tradicional y confort moderno.<br>"
+            + " Nuestra pasión por la excelencia se refleja en cada detalle,<br>"
+            + "desde nuestros interiores meticulosamente diseñados hasta nuestros servicios personalizados para los huéspedes.");
+    nombre.setText( Main.hotel.getNombre() );
+    dirreccion.setText(Main.hotel.getDireccion());
+    telefonomovil.setText("Telefono: " + Main.hotel.getTelefono() + "  Movil: " + Main.hotel.getMovil());
+    fax.setText(Main.hotel.getFax());
+    nit.setText(Main.hotel.getNit());
+    email.setText(Main.hotel.getEmail());
+    }
 
     /**
      * @param args the command line arguments
@@ -515,9 +645,17 @@ public class InicialUI extends javax.swing.JFrame {
     private HabitacionesPanel contentHabitaciones;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AboutusText;
     private javax.swing.JPanel ContentAboutScroll1;
     private javax.swing.JPanel ContentHomeScroll;
+    private javax.swing.JLabel Nuestrahistoriatext;
+    private javax.swing.JLabel Nuestrahistoriatext1;
+    private javax.swing.JLabel Nuestramisiontext;
     private javax.swing.JPanel aboutPanel;
+    private javax.swing.JLabel aboutfoto1;
+    private javax.swing.JLabel aboutfoto2;
+    private javax.swing.JLabel backbody2about;
+    private javax.swing.JLabel backgroundAbout;
     private javax.swing.JLabel backgroundhome;
     private javax.swing.JPanel body1About1;
     private javax.swing.JPanel body1home;
@@ -529,13 +667,16 @@ public class InicialUI extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTabbedPane content;
     private javax.swing.JLabel descripcionHotelhome2body;
+    private javax.swing.JLabel dirreccion;
+    private javax.swing.JLabel email;
+    private javax.swing.JLabel fax;
     private javax.swing.JLabel fot2bodyhome2;
     private javax.swing.JLabel foto2bodyhome;
     private javax.swing.JLabel fraseHome;
     private javax.swing.JPanel homePanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton loginActionBtn;
     private javax.swing.JLabel loginBackground;
     private javax.swing.JLabel loginEmailLabel;
@@ -551,9 +692,16 @@ public class InicialUI extends javax.swing.JFrame {
     private javax.swing.JLabel menuButton;
     private javax.swing.JButton menuHomeBtn;
     private javax.swing.JButton menuLoginBtn;
+    private javax.swing.JLabel nit;
+    private javax.swing.JLabel nombre;
+    private javax.swing.JLabel nuestrahistoria;
+    private javax.swing.JLabel nuestramision;
     private javax.swing.JScrollPane scrollAboutpage1;
     private javax.swing.JScrollPane scrollHomepage;
+    private javax.swing.JLabel telefonomovil;
+    private javax.swing.JLabel titleSobrenosotrosAbout;
     private javax.swing.JLabel titulo2bodyhome;
     private javax.swing.JPanel toolbar;
+    private javax.swing.JPanel uperinformationboarder;
     // End of variables declaration//GEN-END:variables
 }
